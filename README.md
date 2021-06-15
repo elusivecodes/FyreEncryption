@@ -80,7 +80,7 @@ $handler = Encryption::use($key, $config);
 
 ## Handlers
 
-You can load a specific handler by specifying the `handler` property of the `$config` variable above, otherwise the default handler will be loaded.
+You can load a specific handler by specifying the `handler` option of the `$config` variables above, otherwise the default handler will be loaded.
 
 The available handlers are *"sodium"* (default) and *"openssl"*.
 
