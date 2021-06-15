@@ -1,5 +1,5 @@
 {
-    "name": "frost/encryption",
+    "name": "fyre/encryption",
     "description": "An encryption library.",
     "type": "library",
     "license": "MIT",
