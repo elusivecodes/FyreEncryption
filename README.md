@@ -53,7 +53,7 @@ Load a handler.
 - `$config` is the configuration for the handler.
 
 ```php
-$encryption = Encryption::load($config);
+$handler = Encryption::load($config);
 ```
 
 **Set Default Handler**
