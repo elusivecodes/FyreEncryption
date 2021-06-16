@@ -31,8 +31,8 @@ use Fyre\Encryption;
 
 Add a handler.
 
-- `$handler` is the handler name.
-- `$className` is the class name.
+- `$handler` is a string representing the handler name.
+- `$className` is a string representing the class name.
 
 ```php
 Encryption::addHandler($handler, $className);
@@ -50,7 +50,7 @@ Encryption::clear();
 
 Load a handler.
 
-- `$config` is the configuration for the handler.
+- `$config` is an array containing the configuration for the handler.
 
 ```php
 $handler = Encryption::load($config);
@@ -60,7 +60,7 @@ $handler = Encryption::load($config);
 
 Set the default handler.
 
-- `$handler` is the handler name.
+- `$handler` is a string representing the handler name.
 
 ```php
 Encryption::setDefaultHandler($handler);
@@ -70,8 +70,8 @@ Encryption::setDefaultHandler($handler);
 
 Load a shared handler instance.
 
-- `$key` is the instance key.
-- `$config` is the configuration for the handler.
+- `$key` is a string representing the instance key.
+- `$config` is an array containing the configuration for the handler.
 
 ```php
 $handler = Encryption::use($key, $config);
@@ -91,7 +91,7 @@ All handlers extend `\Fyre\Encryption\Handlers\BaseHandler`, ensuring all below 
 Decrypt data.
 
 - `$data` is the encrypted data.
-- `$key` is the encryption key.
+- `$key` is a string representing the encryption key.
 
 ```php
 $decrypted = $handler->decrypt($data, $key);
@@ -102,7 +102,7 @@ $decrypted = $handler->decrypt($data, $key);
 Encrypt data.
 
 - `$data` is the data to encrypt.
-- `$key` is the encryption key.
+- `$key` is a string representing the encryption key.
 
 ```php
 $decrypted = $handler->decrypt($data, $key);
