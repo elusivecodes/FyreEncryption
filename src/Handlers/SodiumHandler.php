@@ -34,9 +34,10 @@ class SodiumHandler extends BaseHandler
 
     /**
      * Decrypt data.
-     * @param string $data
-     * @param string $key
-     * @return mixed
+     * @param string $data The encrypted data.
+     * @param string $key The encryption key.
+     * @return mixed The decrypted data.
+     * @throws EncryptionException if decryption fails.
      */
     public function decrypt(string $data, string $key)
     {
@@ -75,9 +76,9 @@ class SodiumHandler extends BaseHandler
 
     /**
      * Encrypt data.
-     * @param mixed $data
-     * @param string $key
-     * @return string
+     * @param mixed $data The data to encrypt.
+     * @param string $key The encryption key.
+     * @return string The encrypted data.
      */
     public function encrypt($data, string $key): string
     {
@@ -102,8 +103,8 @@ class SodiumHandler extends BaseHandler
 
     /**
      * Generate an encryption key.
-     * @param int|null $length
-     * @return string
+     * @param int|null $length The key length.
+     * @return string The encryption key.
      */
     public function generateKey(int|null $length = null): string
     {

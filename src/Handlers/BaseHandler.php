@@ -22,7 +22,7 @@ abstract class BaseHandler
 
     /**
      * New BaseHandler constructor.
-     * @param array $config
+     * @param array $config Options for the handler.
      */
     public function __construct(array $config = [])
     {
@@ -31,32 +31,32 @@ abstract class BaseHandler
 
     /**
      * Decrypt data.
-     * @param string $data
-     * @param string $key
-     * @return mixed
+     * @param string $data The encrypted data.
+     * @param string $key The encryption key.
+     * @return mixed The decrypted data.
      */
     abstract public function decrypt(string $data, string $key);
 
     /**
      * Encrypt data.
-     * @param mixed $data
-     * @param string $key
-     * @return string
+     * @param mixed $data The data to encrypt.
+     * @param string $key The encryption key.
+     * @return string The encrypted data.
      */
     abstract public function encrypt($data, string $key): string;
 
     /**
      * Generate an encryption key.
-     * @param int|null $length
-     * @return string
+     * @param int|null $length The key length.
+     * @return string The encryption key.
      */
     abstract public function generateKey(int|null $length = null): string;
 
     /**
      * Generate a secret key.
-     * @param string $key
-     * @param int|null $length
-     * @return string
+     * @param string $key The encryption key.
+     * @param int|null $length The key length.
+     * @return string The secret key.
      */
     protected function generateSecret(string $key, int|null $length = null): string
     {
@@ -65,9 +65,9 @@ abstract class BaseHandler
 
     /**
      * Get the HMAC.
-     * @param string $data
-     * @param string $secret
-     * @return string
+     * @param string $data The data to hash.
+     * @param string $secret The secret key.
+     * @return string The hash value.
      */
     protected function getHmac(string $data, string $secret): string
     {
@@ -76,7 +76,7 @@ abstract class BaseHandler
 
     /**
      * Get the HMAC length.
-     * @return string
+     * @return string The HMAC length.
      */
     protected function getHmacLength(): string
     {
@@ -85,10 +85,10 @@ abstract class BaseHandler
 
     /**
      * Multi-byte substr.
-     * @param string $string
-     * @param int $start
-     * @param int|null $length
-     * @return string
+     * @param string $string The input string.
+     * @param int $start The starting offset.
+     * @param int|null $length The maximum length to return.
+     * @return string The sliced string.
      */
     protected static function substr(string $string, int $start, int|null $length = null): string
     {
