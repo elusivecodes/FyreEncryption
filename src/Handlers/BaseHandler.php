@@ -18,7 +18,7 @@ abstract class BaseHandler
         'digest' => 'SHA512'
     ];
 
-    protected $config;
+    protected array $config;
 
     /**
      * New BaseHandler constructor.
