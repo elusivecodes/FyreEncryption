@@ -1,17 +1,18 @@
 <?php
+declare(strict_types=1);
 
-namespace Fyre\Encryption\Handlers;
+namespace Fyre;
 
 use function
-    array_merge,
+    array_merge_recursive,
     hash_hkdf,
     hash_hmac,
     mb_substr;
 
 /**
- * BaseHandler
+ * Encrypter
  */
-abstract class BaseHandler
+abstract class Encrypter
 {
 
     protected static array $defaults = [
@@ -26,7 +27,7 @@ abstract class BaseHandler
      */
     public function __construct(array $config = [])
     {
-        $this->config = array_merge(self::$defaults, static::$defaults, $config);
+        $this->config = array_merge_recursive(static::$defaults, self::$defaults, $config);
     }
 
     /**
@@ -53,12 +54,20 @@ abstract class BaseHandler
     abstract public function generateKey(int|null $length = null): string;
 
     /**
+     * Get the config.
+     */
+    public function getConfig(): array
+    {
+        return $this->config;
+    }
+
+    /**
      * Generate a secret key.
      * @param string $key The encryption key.
-     * @param int|null $length The key length.
+     * @param int $length The key length.
      * @return string The secret key.
      */
-    protected function generateSecret(string $key, int|null $length = null): string
+    protected function generateSecret(string $key, int $length = 0): string
     {
         return hash_hkdf($this->config['digest'], $key, $length);
     }
@@ -78,7 +87,7 @@ abstract class BaseHandler
      * Get the HMAC length.
      * @return string The HMAC length.
      */
-    protected function getHmacLength(): string
+    protected function getHmacLength(): int
     {
         return static::substr($this->config['digest'], 3) / 8;
     }

@@ -68,9 +68,7 @@ final class SodiumTest extends TestCase
     {
         Encryption::clear();
 
-        $this->handler = Encryption::load([
-            'handler' => 'sodium'
-        ]);
+        $this->handler = Encryption::use();
     }
 
 }

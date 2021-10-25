@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Fyre\Encryption\Handlers;
 
 use
+    Fyre\Encrypter,
     Fyre\Encryption\Exceptions\EncryptionException;
 
 use function
@@ -23,9 +25,9 @@ use const
     SODIUM_CRYPTO_SECRETBOX_NONCEBYTES;
 
 /**
- * SodiumHandler
+ * SodiumEncrypter
  */
-class SodiumHandler extends BaseHandler
+class SodiumEncrypter extends Encrypter
 {
 
     protected static array $defaults = [

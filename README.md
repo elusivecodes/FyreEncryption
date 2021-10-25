@@ -27,17 +27,6 @@ use Fyre\Encryption;
 
 ## Methods
 
-**Add Handler**
-
-Add a handler.
-
-- `$handler` is a string representing the handler name.
-- `$className` is a string representing the class name.
-
-```php
-Encryption::addHandler($handler, $className);
-```
-
 **Clear**
 
 Clear instances.
@@ -56,35 +45,36 @@ Load a handler.
 $handler = Encryption::load($config);
 ```
 
-**Set Default Handler**
+**Set Config**
 
-Set the default handler.
+Set the encryption config.
 
-- `$handler` is a string representing the handler name.
+- `$config` is an array containing configuration data.
 
 ```php
-Encryption::setDefaultHandler($handler);
+Encryption::setConfig($config);
 ```
 
 **Use**
 
 Load a shared handler instance.
 
-- `$key` is a string representing the instance key.
-- `$config` is an array containing the configuration for the handler.
+- `$key` is a string representing the config key, and will default to *"default"*.
 
 ```php
-$handler = Encryption::use($key, $config);
+$handler = Encryption::use($key);
 ```
 
 
 ## Handlers
 
-You can load a specific handler by specifying the `handler` option of the `$config` variables above, otherwise the default handler will be loaded.
+You can load a specific handler by specifying the `handler` option of the `$config` variable above.
 
-The available handlers are *"sodium"* (default) and *"openssl"*.
+The available handlers are:
+- *default* - `\Fyre\Encryption\Handlers\SodiumEncrypter`
+- *openssl* - `\Fyre\Encryption\Handlers\OpenSSLEncrypter`
 
-All handlers extend `\Fyre\Encryption\Handlers\BaseHandler`, ensuring all below methods are implemented.
+Custom handlers can be created by extending `\Fyre\Encrypter`, ensuring all below methods are implemented.
 
 **Decrypt**
 
@@ -94,7 +84,7 @@ Decrypt data.
 - `$key` is a string representing the encryption key.
 
 ```php
-$decrypted = $handler->decrypt($data, $key);
+$decrypted = Encryption::use()->decrypt($data, $key);
 ```
 
 **Encrypt**
@@ -105,7 +95,7 @@ Encrypt data.
 - `$key` is a string representing the encryption key.
 
 ```php
-$decrypted = $handler->decrypt($data, $key);
+$encrypted = Encryption::use()->decrypt($data, $key);
 ```
 
 **Generate Key**
@@ -113,5 +103,5 @@ $decrypted = $handler->decrypt($data, $key);
 Generate an encryption key.
 
 ```php
-$key = $handler->generateKey();
+$key = Encryption::use()->generateKey();
 ```

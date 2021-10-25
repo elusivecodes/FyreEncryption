@@ -1,8 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace Fyre\Encryption\Handlers;
 
 use
+    Fyre\Encrypter,
     Fyre\Encryption\Exceptions\EncryptionException;
 
 use function
@@ -18,9 +20,9 @@ use const
     OPENSSL_RAW_DATA;
 
 /**
- * OpenSSLHandler
+ * OpenSSLEncrypter
  */
-class OpenSSLHandler extends BaseHandler
+class OpenSSLEncrypter extends Encrypter
 {
 
     protected static array $defaults = [

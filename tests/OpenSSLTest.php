@@ -65,9 +65,7 @@ final class OpenSSLTest extends TestCase
     {
         Encryption::clear();
 
-        $this->handler = Encryption::load([
-            'handler' => 'openssl'
-        ]);
+        $this->handler = Encryption::use('openssl');
     }
 
 }

@@ -6,10 +6,10 @@ namespace Tests;
 use
     Fyre\Encryption,
     Fyre\Encryption\Exceptions\EncryptionException,
-    Fyre\Encryption\Handlers\OpenSSLHandler,
-    Fyre\Encryption\Handlers\SodiumHandler,
+    Fyre\Encryption\Handlers\OpenSSLEncrypter,
+    Fyre\Encryption\Handlers\SodiumEncrypter,
     PHPUnit\Framework\TestCase,
-    Tests\Mock\MockHandler;
+    Tests\Mock\MockEncrypter;
 
 final class EncryptionTest extends TestCase
 {
@@ -17,17 +17,19 @@ final class EncryptionTest extends TestCase
     public function testEncryptionLoad(): void
     {
         $this->assertInstanceOf(
-            SodiumHandler::class,
-            Encryption::load()
+            SodiumEncrypter::class,
+            Encryption::load([
+                'className' => SodiumEncrypter::class
+            ])
         );
     }
 
     public function testEncryptionLoadHandler(): void
     {
         $this->assertInstanceOf(
-            OpenSSLHandler::class,
+            OpenSSLEncrypter::class,
             Encryption::load([
-                'handler' => 'openssl'
+                'className' => OpenSSLEncrypter::class
             ])
         );
     }
@@ -37,7 +39,7 @@ final class EncryptionTest extends TestCase
         $this->expectException(EncryptionException::class);
 
         Encryption::load([
-            'handler' => 'invalid'
+            'className' => 'invalid'
         ]);
     }
 
@@ -49,20 +51,20 @@ final class EncryptionTest extends TestCase
         $this->assertSame($handler1, $handler2);
 
         $this->assertInstanceOf(
-            SodiumHandler::class,
+            SodiumEncrypter::class,
             $handler1
         );
     }
 
     public function testEncryptionUseKey(): void
     {
-        $handler1 = Encryption::use('sodium');
-        $handler2 = Encryption::use('test');
+        $handler1 = Encryption::use('default');
+        $handler2 = Encryption::use('openssl');
 
         $this->assertNotSame($handler1, $handler2);
 
         $this->assertInstanceOf(
-            SodiumHandler::class,
+            SodiumEncrypter::class,
             $handler1
         );
     }
@@ -70,42 +72,20 @@ final class EncryptionTest extends TestCase
     public function testEncryptionUseHandler(): void
     {
         $this->assertInstanceOf(
-            OpenSSLHandler::class,
-            Encryption::use(null, [
-                'handler' => 'openssl'
-            ])
+            OpenSSLEncrypter::class,
+            Encryption::use('openssl')
         );
-    }
-
-    public function testEncryptionUseInvalidHandler(): void
-    {
-        $this->expectException(EncryptionException::class);
-
-        Encryption::use(null, [
-            'handler' => 'invalid'
-        ]);
     }
 
     public function testEncryptionAddHandler(): void
     {
-        Encryption::addHandler('mock', MockHandler::class);
+        Encryption::setConfig('mock', [
+            'className' => MockEncrypter::class
+        ]);
 
         $this->assertInstanceOf(
-            MockHandler::class,
-            Encryption::use(null, [
-                'handler' => 'mock'
-            ])
-        );
-    }
-
-    public function testEncryptionSetDefaultHandler(): void
-    {
-        Encryption::addHandler('mock', MockHandler::class);
-        Encryption::setDefaultHandler('mock');
-
-        $this->assertInstanceOf(
-            MockHandler::class,
-            Encryption::use()
+            MockEncrypter::class,
+            Encryption::use('mock')
         );
     }
 

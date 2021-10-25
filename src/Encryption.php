@@ -1,12 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace Fyre;
 
 use
+    Fyre\Encrypter,
     Fyre\Encryption\Exceptions\EncryptionException,
-    Fyre\Encryption\Handlers\BaseHandler,
-    Fyre\Encryption\Handlers\OpenSSLHandler,
-    Fyre\Encryption\Handlers\SodiumHandler;
+    Fyre\Encryption\Handlers\OpenSSLEncrypter,
+    Fyre\Encryption\Handlers\SodiumEncrypter;
 
 use function
     array_key_exists,
@@ -18,24 +19,16 @@ use function
 abstract class Encryption
 {
 
-    protected static string $defaultHandler = 'sodium';
-
-    protected static array $handlers = [
-        'openssl' => OpenSSLHandler::class,
-        'sodium' => SodiumHandler::class
+    protected static array $config = [
+        'default' => [
+            'className' => SodiumEncrypter::class
+        ],
+        'openssl' => [
+            'className' => OpenSSLEncrypter::class
+        ]
     ];
 
     protected static array $instances = [];
-
-    /**
-     * Add a handler.
-     * @param string $handler The handler name.
-     * @param string $className The class name.
-     */
-    public static function addHandler(string $handler, string $className): void
-    {
-        static::$handlers[$handler] = $className;
-    }
 
     /**
      * Clear instances.
@@ -48,48 +41,40 @@ abstract class Encryption
     /**
      * Load a handler.
      * @param array $config Options for the handler.
-     * @return BaseHandler The handler.
+     * @return Encrypter The handler.
      * @throws EncryptionException if the handler is invalid.
      */
-    public static function load(array $config = []): BaseHandler
+    public static function load(array $config = []): Encrypter
     {
-        $handler = $config['handler'] ?? static::$defaultHandler;
-
-        unset($config['handler']);
-
-        if (!array_key_exists($handler, static::$handlers)) {
-            throw EncryptionException::forInvalidHandler($handler);
+        if (!array_key_exists('className', $config)) {
+            throw EncryptionException::forInvalidClass();
         }
 
-        $className = static::$handlers[$handler];
-
-        if (!class_exists($className, true)) {
-            throw EncryptionException::forInvalidClass($className);
+        if (!class_exists($config['className'], true)) {
+            throw EncryptionException::forInvalidClass($config['className']);
         }
 
-        return new $className($config);
+        return new $config['className']($config);
     }
 
     /**
-     * Set the default handler.
-     * @param string $handler The handler name.
+     * Set handler config.
+     * @param string $key The config key.
+     * @param array $config The config options.
      */
-    public static function setDefaultHandler(string $handler): void
+    public static function setConfig(string $key, array $config): void
     {
-        static::$defaultHandler = $handler;
+        static::$config[$key] = $config;
     }
 
     /**
      * Load a shared handler instance.
-     * @param string|null $key The handler key.
-     * @param array $config Options for the handler.
-     * @return BaseHandler The handler.
+     * @param string $key The config key.
+     * @return Encrypter The handler.
      */
-    public static function &use(string|null $key = null, array $config = []): BaseHandler
+    public static function &use(string $key = 'default'): Encrypter
     {
-        $key ??= 'default';
-
-        static::$instances[$key] ??= static::load($config);
+        static::$instances[$key] ??= static::load(static::$config[$key] ?? []);
 
         return static::$instances[$key];
     }

@@ -3,9 +3,9 @@
 namespace Tests\Mock;
 
 use
-    Fyre\Encryption\Handlers\BaseHandler;
+    Fyre\Encrypter;
 
-class MockHandler extends BaseHandler
+class MockEncrypter extends Encrypter
 {
 
     public function decrypt(string $data, string $key)

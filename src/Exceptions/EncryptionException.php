@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Fyre\Encryption\Exceptions;
 
@@ -21,14 +22,9 @@ class EncryptionException extends RunTimeException
         return new static('Encryption failed');
     }
 
-    public static function forInvalidClass(string $className)
+    public static function forInvalidClass(string $className = '')
     {
-        return new static('Class not found: '.$className);
-    }
-
-    public static function forInvalidHandler(string $handler)
-    {
-        return new static('Invalid handler: '.$handler);
+        return new static('Encryption handler class not found: '.$className);
     }
 
 }
