@@ -72,11 +72,9 @@ abstract class Encryption
      * @param string $key The config key.
      * @return Encrypter The handler.
      */
-    public static function &use(string $key = 'default'): Encrypter
+    public static function use(string $key = 'default'): Encrypter
     {
-        static::$instances[$key] ??= static::load(static::$config[$key] ?? []);
-
-        return static::$instances[$key];
+        return static::$instances[$key] ??= static::load(static::$config[$key] ?? []);
     }
 
 }

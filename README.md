@@ -95,7 +95,7 @@ Encrypt data.
 - `$key` is a string representing the encryption key.
 
 ```php
-$encrypted = Encryption::use()->decrypt($data, $key);
+$encrypted = Encryption::use()->encrypt($data, $key);
 ```
 
 **Generate Key**
