@@ -22,7 +22,7 @@ abstract class Encrypter
     protected array $config;
 
     /**
-     * New BaseHandler constructor.
+     * New Encrypter constructor.
      * @param array $config Options for the handler.
      */
     public function __construct(array $config = [])
