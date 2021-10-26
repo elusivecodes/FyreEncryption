@@ -6,7 +6,7 @@
 ## Table Of Contents
 - [Installation](#installation)
 - [Methods](#methods)
-- [Handlers](#handlers)
+- [Encrypters](#encrypters)
 
 
 
@@ -21,7 +21,7 @@ composer install fyre/encryption
 In PHP:
 
 ```php
-use Fyre\Encryption;
+use Fyre\Encryption\Encryption;
 ```
 
 
@@ -37,44 +37,45 @@ Encryption::clear();
 
 **Load**
 
-Load a handler.
+Load an encrypter.
 
-- `$config` is an array containing the configuration for the handler.
+- `$config` is an array containing the configuration for the encrypter.
 
 ```php
-$handler = Encryption::load($config);
+$encrypter = Encryption::load($config);
 ```
 
 **Set Config**
 
-Set the encryption config.
+Set the encrypter config.
 
+- `$key` is a string representing the encrypter key.
 - `$config` is an array containing configuration data.
 
 ```php
-Encryption::setConfig($config);
+Encryption::setConfig($key, $config);
 ```
 
 **Use**
 
-Load a shared handler instance.
+Load a shared encrypter instance.
 
-- `$key` is a string representing the config key, and will default to *"default"*.
+- `$key` is a string representing the encrypter key, and will default to *"default"*.
 
 ```php
-$handler = Encryption::use($key);
+$encrypter = Encryption::use($key);
 ```
 
 
-## Handlers
+## Encrypters
 
-You can load a specific handler by specifying the `handler` option of the `$config` variable above.
+You can load a specific encrypter by specifying the `className` option of the `$config` variable above.
 
-The available handlers are:
+The default encrypters are:
 - *default* - `\Fyre\Encryption\Handlers\SodiumEncrypter`
 - *openssl* - `\Fyre\Encryption\Handlers\OpenSSLEncrypter`
 
-Custom handlers can be created by extending `\Fyre\Encrypter`, ensuring all below methods are implemented.
+Custom encrypters can be created by extending `\Fyre\Encryption\Encrypter`, ensuring all below methods are implemented.
 
 **Decrypt**
 
@@ -84,7 +85,7 @@ Decrypt data.
 - `$key` is a string representing the encryption key.
 
 ```php
-$decrypted = Encryption::use()->decrypt($data, $key);
+$decrypted = $encrypter->decrypt($data, $key);
 ```
 
 **Encrypt**
@@ -95,7 +96,7 @@ Encrypt data.
 - `$key` is a string representing the encryption key.
 
 ```php
-$encrypted = Encryption::use()->encrypt($data, $key);
+$encrypted = $encrypter->encrypt($data, $key);
 ```
 
 **Generate Key**
@@ -103,5 +104,5 @@ $encrypted = Encryption::use()->encrypt($data, $key);
 Generate an encryption key.
 
 ```php
-$key = Encryption::use()->generateKey();
+$key = $encrypter->generateKey();
 ```

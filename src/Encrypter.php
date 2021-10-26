@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Fyre;
+namespace Fyre\Encryption;
 
 use function
     array_merge_recursive,

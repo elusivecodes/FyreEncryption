@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Fyre;
+namespace Fyre\Encryption;
 
 use
-    Fyre\Encrypter,
     Fyre\Encryption\Exceptions\EncryptionException,
     Fyre\Encryption\Handlers\OpenSSLEncrypter,
     Fyre\Encryption\Handlers\SodiumEncrypter;

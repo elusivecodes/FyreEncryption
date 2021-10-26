@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use
-    Fyre\Encryption,
+    Fyre\Encryption\Encryption,
     Fyre\Encryption\Exceptions\EncryptionException,
     Fyre\Encryption\Handlers\OpenSSLEncrypter,
     Fyre\Encryption\Handlers\SodiumEncrypter,

@@ -11,9 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "Fyre\\": "src/",
-            "Fyre\\Encryption\\Exceptions\\": "src/Exceptions/",
-            "Fyre\\Encryption\\Handlers\\": "src/Handlers/"
+            "Fyre\\Encryption\\": "src/"
         }
     },
     "autoload-dev": {

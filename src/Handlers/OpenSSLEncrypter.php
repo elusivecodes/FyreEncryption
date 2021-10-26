@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Fyre\Encryption\Handlers;
 
 use
-    Fyre\Encrypter,
+    Fyre\Encryption\Encrypter,
     Fyre\Encryption\Exceptions\EncryptionException;
 
 use function

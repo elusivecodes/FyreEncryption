@@ -3,7 +3,7 @@
 namespace Tests\Mock;
 
 use
-    Fyre\Encrypter;
+    Fyre\Encryption\Encrypter;
 
 class MockEncrypter extends Encrypter
 {
