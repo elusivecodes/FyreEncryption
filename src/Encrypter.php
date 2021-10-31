@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Fyre\Encryption;
 
 use function
-    array_merge_recursive,
+    array_replace_recursive,
     hash_hkdf,
     hash_hmac,
     mb_substr;
@@ -27,7 +27,7 @@ abstract class Encrypter
      */
     public function __construct(array $config = [])
     {
-        $this->config = array_merge_recursive(static::$defaults, self::$defaults, $config);
+        $this->config = array_replace_recursive(static::$defaults, self::$defaults, $config);
     }
 
     /**
@@ -55,6 +55,7 @@ abstract class Encrypter
 
     /**
      * Get the config.
+     * @return array The config.
      */
     public function getConfig(): array
     {

@@ -24,22 +24,12 @@ final class EncryptionTest extends TestCase
         );
     }
 
-    public function testEncryptionLoadHandler(): void
-    {
-        $this->assertInstanceOf(
-            OpenSSLEncrypter::class,
-            Encryption::load([
-                'className' => OpenSSLEncrypter::class
-            ])
-        );
-    }
-
     public function testEncryptionLoadInvalidHandler(): void
     {
         $this->expectException(EncryptionException::class);
 
         Encryption::load([
-            'className' => 'invalid'
+            'className' => 'Invalid'
         ]);
     }
 
@@ -49,19 +39,6 @@ final class EncryptionTest extends TestCase
         $handler2 = Encryption::use();
 
         $this->assertSame($handler1, $handler2);
-
-        $this->assertInstanceOf(
-            SodiumEncrypter::class,
-            $handler1
-        );
-    }
-
-    public function testEncryptionUseKey(): void
-    {
-        $handler1 = Encryption::use('default');
-        $handler2 = Encryption::use('openssl');
-
-        $this->assertNotSame($handler1, $handler2);
 
         $this->assertInstanceOf(
             SodiumEncrypter::class,
