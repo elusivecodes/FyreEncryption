@@ -15,7 +15,7 @@
 **Using Composer**
 
 ```
-composer install fyre/encryption
+composer require fyre/encryption
 ```
 
 In PHP:
