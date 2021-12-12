@@ -41,7 +41,7 @@ Encryption::clear();
 
 Load an encrypter.
 
-- `$config` is an array containing the configuration for the encrypter.
+- `$config` is an array containing configuration options.
 
 ```php
 $encrypter = Encryption::load($config);
@@ -52,7 +52,7 @@ $encrypter = Encryption::load($config);
 Set the encrypter config.
 
 - `$key` is a string representing the encrypter key.
-- `$config` is an array containing configuration data.
+- `$config` is an array containing configuration options.
 
 ```php
 Encryption::setConfig($key, $config);
