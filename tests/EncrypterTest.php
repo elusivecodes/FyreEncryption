@@ -12,7 +12,7 @@ trait EncrypterTest
 
     protected Encrypter $encrypter;
 
-    public function testEncrypterEncryption(): void
+    public function testEncryption(): void
     {
         $text = 'This is a sample string';
         $key = 'abc123';
@@ -24,7 +24,7 @@ trait EncrypterTest
         $this->assertEquals($text, $decrypted);
     }
 
-    public function testEncrypterEncryptionArray(): void
+    public function testEncryptionArray(): void
     {
         $data = [1, 2, 3];
         $key = 'abc123';
@@ -36,7 +36,7 @@ trait EncrypterTest
         $this->assertEquals($data, $decrypted);
     }
 
-    public function testEncrypterInvalidKey(): void
+    public function testInvalidKey(): void
     {
         $this->expectException(EncryptionException::class);
 
@@ -44,7 +44,7 @@ trait EncrypterTest
         $this->encrypter->decrypt($encrypted, 'invalid');
     }
 
-    public function testEncrypterGenerateKeyRandom(): void
+    public function testGenerateKeyRandom(): void
     {
         $key1 = $this->encrypter->generateKey();
         $key2 = $this->encrypter->generateKey();

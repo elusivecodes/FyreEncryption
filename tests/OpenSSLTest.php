@@ -13,7 +13,7 @@ final class OpenSSLTest extends TestCase
     use
         EncrypterTest;
 
-    public function testOpenSSLGenerateKey(): void
+    public function testGenerateKey(): void
     {
         $key = $this->encrypter->generateKey();
 

@@ -13,7 +13,7 @@ final class SodiumTest extends TestCase
     use
         EncrypterTest;
 
-    public function testSodiumGenerateKey(): void
+    public function testGenerateKey(): void
     {
         $key = $this->encrypter->generateKey();
 

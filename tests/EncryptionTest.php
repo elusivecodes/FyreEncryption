@@ -14,7 +14,7 @@ use
 final class EncryptionTest extends TestCase
 {
 
-    public function testEncryptionLoad(): void
+    public function testLoad(): void
     {
         $this->assertInstanceOf(
             SodiumEncrypter::class,
@@ -24,7 +24,7 @@ final class EncryptionTest extends TestCase
         );
     }
 
-    public function testEncryptionLoadInvalidHandler(): void
+    public function testLoadInvalidHandler(): void
     {
         $this->expectException(EncryptionException::class);
 
@@ -33,7 +33,7 @@ final class EncryptionTest extends TestCase
         ]);
     }
 
-    public function testEncryptionUse(): void
+    public function testUse(): void
     {
         $handler1 = Encryption::use();
         $handler2 = Encryption::use();
@@ -46,7 +46,7 @@ final class EncryptionTest extends TestCase
         );
     }
 
-    public function testEncryptionUseHandler(): void
+    public function testUseHandler(): void
     {
         $this->assertInstanceOf(
             OpenSSLEncrypter::class,
@@ -54,7 +54,7 @@ final class EncryptionTest extends TestCase
         );
     }
 
-    public function testEncryptionAddHandler(): void
+    public function testAddHandler(): void
     {
         Encryption::setConfig('mock', [
             'className' => MockEncrypter::class
