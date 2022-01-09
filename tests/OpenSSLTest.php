@@ -17,7 +17,7 @@ final class OpenSSLTest extends TestCase
     {
         $key = $this->encrypter->generateKey();
 
-        $this->assertEquals(
+        $this->assertSame(
             24,
             strlen($key)
         );

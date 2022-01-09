@@ -20,8 +20,8 @@ trait EncrypterTest
         $encrypted = $this->encrypter->encrypt($text, $key);
         $decrypted = $this->encrypter->decrypt($encrypted, $key);
 
-        $this->assertNotEquals($text, $encrypted);
-        $this->assertEquals($text, $decrypted);
+        $this->assertNotSame($text, $encrypted);
+        $this->assertSame($text, $decrypted);
     }
 
     public function testEncryptionArray(): void
@@ -32,8 +32,8 @@ trait EncrypterTest
         $encrypted = $this->encrypter->encrypt($data, $key);
         $decrypted = $this->encrypter->decrypt($encrypted, $key);
 
-        $this->assertNotEquals($data, $encrypted);
-        $this->assertEquals($data, $decrypted);
+        $this->assertNotSame($data, $encrypted);
+        $this->assertSame($data, $decrypted);
     }
 
     public function testInvalidKey(): void
@@ -49,7 +49,7 @@ trait EncrypterTest
         $key1 = $this->encrypter->generateKey();
         $key2 = $this->encrypter->generateKey();
 
-        $this->assertNotEquals($key1, $key2);
+        $this->assertNotSame($key1, $key2);
     }
 
 }

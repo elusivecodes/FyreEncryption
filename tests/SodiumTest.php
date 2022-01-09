@@ -17,7 +17,7 @@ final class SodiumTest extends TestCase
     {
         $key = $this->encrypter->generateKey();
 
-        $this->assertEquals(
+        $this->assertSame(
             SODIUM_CRYPTO_SECRETBOX_KEYBYTES,
             strlen($key)
         );

@@ -41,10 +41,10 @@ Encryption::clear();
 
 Load an encrypter.
 
-- `$config` is an array containing configuration options.
+- `$options` is an array containing configuration options.
 
 ```php
-$encrypter = Encryption::load($config);
+$encrypter = Encryption::load($options);
 ```
 
 **Set Config**
@@ -52,10 +52,10 @@ $encrypter = Encryption::load($config);
 Set the encrypter config.
 
 - `$key` is a string representing the encrypter key.
-- `$config` is an array containing configuration options.
+- `$options` is an array containing configuration options.
 
 ```php
-Encryption::setConfig($key, $config);
+Encryption::setConfig($key, $options);
 ```
 
 **Use**
@@ -71,7 +71,7 @@ $encrypter = Encryption::use($key);
 
 ## Encrypters
 
-You can load a specific encrypter by specifying the `className` option of the `$config` variable above.
+You can load a specific encrypter by specifying the `className` option of the `$options` variable above.
 
 Custom encrypters can be created by extending `\Fyre\Encryption\Encrypter`, ensuring all below methods are implemented.
 
@@ -117,12 +117,12 @@ $encrypter = Encryption::use();
 You can also load the encrypter using custom configuration.
 
 - `$key` is a string representing the encrypter key.
-- `$config` is an array containing configuration options.
+- `$options` is an array containing configuration options.
     - `className` must be set to `\Fyre\Encryption\Handlers\SodiumEncrypter`.
     - `blockSize` is a number indicating the block size, and will default to *16*.
 
 ```php
-Encryption::setConfig($key, $config);
+Encryption::setConfig($key, $options);
 $encrypter = Encryption::use($key);
 ```
 
@@ -138,11 +138,11 @@ $encrypter = Encryption::use('openssl');
 You can also load the encrypter using custom configuration.
 
 - `$key` is a string representing the encrypter key.
-- `$config` is an array containing configuration options.
+- `$options` is an array containing configuration options.
     - `className` must be set to `\Fyre\Encryption\Handlers\OpenSSLEncrypter`.
     - `cipher` is a string indicating the cipher, and will default to "*AES-256-CTR*".
 
 ```php
-Encryption::setConfig($key, $config);
+Encryption::setConfig($key, $options);
 $encrypter = Encryption::use($key);
 ```
