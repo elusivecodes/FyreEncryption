@@ -45,7 +45,7 @@ abstract class Encryption
      */
     public static function getKey(Encrypter $encrypter): string|null
     {
-        return array_search($encrypter, $this->instances, true) ?: null;
+        return array_search($encrypter, static::$instances, true) ?: null;
     }
 
     /**
