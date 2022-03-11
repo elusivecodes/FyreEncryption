@@ -10,6 +10,7 @@ use
 
 use function
     array_key_exists,
+    array_search,
     class_exists;
 
 /**
@@ -35,6 +36,16 @@ abstract class Encryption
     public static function clear(): void
     {
         static::$instances = [];
+    }
+
+    /**
+     * Get the key for an encrypter instance.
+     * @param Encrypter $encrypter The Encrypter.
+     * @return string|null The encrypter key.
+     */
+    public static function getKey(Encrypter $encrypter): string|null
+    {
+        return array_search($encrypter, $this->instances, true) ?: null;
     }
 
     /**

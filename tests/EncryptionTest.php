@@ -14,6 +14,28 @@ use
 final class EncryptionTest extends TestCase
 {
 
+    public function getKey(): void
+    {
+        $handler = Encryption::use();
+
+        $this->assertSame(
+            'default',
+            Encryption::getKey($handler)
+        );
+    }
+
+    public function getKeyInvalid(): void
+    {
+        $handler = Encryption::load([
+            'className' => SodiumEncrypter::class
+        ]);
+
+        $this->assertSame(
+            null,
+            Encryption::getKey($handler)
+        );
+    }
+
     public function testLoad(): void
     {
         $this->assertInstanceOf(

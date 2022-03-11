@@ -37,6 +37,16 @@ Clear instances.
 Encryption::clear();
 ```
 
+**Get Key**
+
+Get the key for an encrypter instance.
+
+- `$encrypter` is a *Encrypter*.
+
+```php
+$key = Encryption::getKey($encrypter);
+```
+
 **Load**
 
 Load an encrypter.
