@@ -36,7 +36,7 @@ abstract class Encrypter
      * @param string $key The encryption key.
      * @return mixed The decrypted data.
      */
-    abstract public function decrypt(string $data, string $key);
+    abstract public function decrypt(string $data, string $key): mixed;
 
     /**
      * Encrypt data.
@@ -44,7 +44,7 @@ abstract class Encrypter
      * @param string $key The encryption key.
      * @return string The encrypted data.
      */
-    abstract public function encrypt($data, string $key): string;
+    abstract public function encrypt(mixed $data, string $key): string;
 
     /**
      * Generate an encryption key.

@@ -8,7 +8,7 @@ use
 class MockEncrypter extends Encrypter
 {
 
-    public function decrypt(string $data, string $key)
+    public function decrypt(string $data, string $key): mixed
     {
         return '';
     }

@@ -41,7 +41,7 @@ class SodiumEncrypter extends Encrypter
      * @return mixed The decrypted data.
      * @throws EncryptionException if decryption fails.
      */
-    public function decrypt(string $data, string $key)
+    public function decrypt(string $data, string $key): mixed
     {
         if (mb_strlen($data, '8bit') < SODIUM_CRYPTO_SECRETBOX_NONCEBYTES + SODIUM_CRYPTO_SECRETBOX_MACBYTES) {
             throw EncryptionException::forDecryptionFailed();
@@ -82,7 +82,7 @@ class SodiumEncrypter extends Encrypter
      * @param string $key The encryption key.
      * @return string The encrypted data.
      */
-    public function encrypt($data, string $key): string
+    public function encrypt(mixed $data, string $key): string
     {
         $secret = $this->generateSecret($key, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
         $nonce = $this->generateKey(SODIUM_CRYPTO_SECRETBOX_NONCEBYTES);

@@ -36,7 +36,7 @@ class OpenSSLEncrypter extends Encrypter
      * @return mixed The decrypted data.
      * @throws EncryptionException if decryption fails.
      */
-    public function decrypt(string $data, string $key)
+    public function decrypt(string $data, string $key): mixed
     {
         $secret = $this->generateSecret($key);
 
@@ -66,7 +66,7 @@ class OpenSSLEncrypter extends Encrypter
      * @return string The encrypted data.
      * @throws EncryptionException if encryption fails.
      */
-    public function encrypt($data, string $key): string
+    public function encrypt(mixed $data, string $key): string
     {
         $secret = $this->generateSecret($key);
         $ivSize = $this->getCipherLength();
