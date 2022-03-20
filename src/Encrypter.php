@@ -23,7 +23,7 @@ abstract class Encrypter
 
     /**
      * New Encrypter constructor.
-     * @param array $config Options for the handler.
+     * @param array $options Options for the handler.
      */
     public function __construct(array $options = [])
     {
