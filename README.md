@@ -7,8 +7,8 @@
 - [Installation](#installation)
 - [Methods](#methods)
 - [Encrypters](#encrypters)
-    - [Sodium](#sodium)
     - [OpenSSL](#openssl)
+    - [Sodium](#sodium)
 
 
 
@@ -31,10 +31,26 @@ use Fyre\Encryption\Encryption;
 
 **Clear**
 
-Clear instances.
+Clear all instances and configs.
 
 ```php
 Encryption::clear();
+```
+
+**Get Config**
+
+Set an encrypter config.
+
+- `$key` is a string representing the encrypter key.
+
+```php
+$config = Encryption::getConfig($key);
+```
+
+Alternatively, if the `$key` argument is omitted an array containing all configurations will be returned.
+
+```php
+$config = Encryption::getConfig();
 ```
 
 **Get Key**
@@ -66,6 +82,22 @@ Set the encrypter config.
 
 ```php
 Encryption::setConfig($key, $options);
+```
+
+Alternatively, a single array can be provided containing key/value of configuration options.
+
+```php
+Encryption::setConfig($config);
+```
+
+**Unload**
+
+Unload an encrypter.
+
+- `$key` is a string representing the encrypter key, and will default to *"default"*.
+
+```php
+Encryption::unload($key);
 ```
 
 **Use**
@@ -116,27 +148,6 @@ $key = $encrypter->generateKey();
 ```
 
 
-### Sodium
-
-The Sodium encrypter is the default handler.
-
-```php
-$encrypter = Encryption::use();
-```
-
-You can also load the encrypter using custom configuration.
-
-- `$key` is a string representing the encrypter key.
-- `$options` is an array containing configuration options.
-    - `className` must be set to `\Fyre\Encryption\Handlers\SodiumEncrypter`.
-    - `blockSize` is a number indicating the block size, and will default to *16*.
-
-```php
-Encryption::setConfig($key, $options);
-$encrypter = Encryption::use($key);
-```
-
-
 ### OpenSSL
 
 The OpenSSL encrypter can be loaded using default configuration using the "*openssl*" key.
@@ -154,5 +165,28 @@ You can also load the encrypter using custom configuration.
 
 ```php
 Encryption::setConfig($key, $options);
+
+$encrypter = Encryption::use($key);
+```
+
+
+### Sodium
+
+The Sodium encrypter is the default handler.
+
+```php
+$encrypter = Encryption::use();
+```
+
+You can also load the encrypter using custom configuration.
+
+- `$key` is a string representing the encrypter key.
+- `$options` is an array containing configuration options.
+    - `className` must be set to `\Fyre\Encryption\Handlers\SodiumEncrypter`.
+    - `blockSize` is a number indicating the block size, and will default to *16*.
+
+```php
+Encryption::setConfig($key, $options);
+
 $encrypter = Encryption::use($key);
 ```

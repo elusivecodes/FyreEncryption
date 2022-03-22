@@ -12,6 +12,11 @@ use
 class EncryptionException extends RunTimeException
 {
 
+    public static function forConfigExists(string $key)
+    {
+        return new static('Encryption handler config already exists: '.$key);
+    }
+
     public static function forDecryptionFailed()
     {
         return new static('Decryption failed');
@@ -25,6 +30,11 @@ class EncryptionException extends RunTimeException
     public static function forInvalidClass(string $className = '')
     {
         return new static('Encryption handler class not found: '.$className);
+    }
+
+    public static function forInvalidConfig(string $key)
+    {
+        return new static('Encryption handler invalid config: '.$key);
     }
 
 }
