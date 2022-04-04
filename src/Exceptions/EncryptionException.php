@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Fyre\Encryption\Exceptions;
 
 use
-    Fyre\Error\Exceptions\Exception;
+    RuntimeException;
 
 /**
  * EncryptionException
  */
-class EncryptionException extends Exception
+class EncryptionException extends RuntimeException
 {
 
     public static function forConfigExists(string $key)
