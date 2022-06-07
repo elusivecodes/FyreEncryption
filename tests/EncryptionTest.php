@@ -14,32 +14,32 @@ use
 final class EncryptionTest extends TestCase
 {
 
-    public function getConfig(): void
+    public function testGetConfig(): void
     {
         $this->assertSame(
             [
                 'default' => [
                     'className' => SodiumEncrypter::class
                 ],
-                'openss' => [
+                'openssl' => [
                     'className' => OpenSSLEncrypter::class
                 ]
             ],
-            Cache::getConfig()
+            Encryption::getConfig()
         );
     }
 
-    public function getConfigKey(): void
+    public function testGetConfigKey(): void
     {
         $this->assertSame(
             [
                 'className' => SodiumEncrypter::class
             ],
-            Cache::getConfig('default')
+            Encryption::getConfig('default')
         );
     }
 
-    public function getKey(): void
+    public function testGetKey(): void
     {
         $handler = Encryption::use();
 
@@ -49,7 +49,7 @@ final class EncryptionTest extends TestCase
         );
     }
 
-    public function getKeyInvalid(): void
+    public function testGetKeyInvalid(): void
     {
         $handler = Encryption::load([
             'className' => SodiumEncrypter::class
