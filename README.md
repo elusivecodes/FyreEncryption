@@ -39,9 +39,9 @@ Encryption::clear();
 
 **Get Config**
 
-Set an encrypter config.
+Set an [*Encrypter*](#encrypters) config.
 
-- `$key` is a string representing the encrypter key.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key.
 
 ```php
 $config = Encryption::getConfig($key);
@@ -55,9 +55,9 @@ $config = Encryption::getConfig();
 
 **Get Key**
 
-Get the key for an encrypter instance.
+Get the key for an [*Encrypter*](#encrypters) instance.
 
-- `$encrypter` is a *Encrypter*.
+- `$encrypter` is a [*Encrypter*](#encrypters).
 
 ```php
 $key = Encryption::getKey($encrypter);
@@ -65,7 +65,7 @@ $key = Encryption::getKey($encrypter);
 
 **Load**
 
-Load an encrypter.
+Load an [*Encrypter*](#encrypters).
 
 - `$options` is an array containing configuration options.
 
@@ -75,9 +75,9 @@ $encrypter = Encryption::load($options);
 
 **Set Config**
 
-Set the encrypter config.
+Set the [*Encrypter*](#encrypters) config.
 
-- `$key` is a string representing the encrypter key.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key.
 - `$options` is an array containing configuration options.
 
 ```php
@@ -92,9 +92,9 @@ Encryption::setConfig($config);
 
 **Unload**
 
-Unload an encrypter.
+Unload an [*Encrypter*](#encrypters).
 
-- `$key` is a string representing the encrypter key, and will default to *"default"*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *"default"*.
 
 ```php
 Encryption::unload($key);
@@ -102,9 +102,9 @@ Encryption::unload($key);
 
 **Use**
 
-Load a shared encrypter instance.
+Load a shared [*Encrypter*](#encrypters) instance.
 
-- `$key` is a string representing the encrypter key, and will default to *"default"*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *"default"*.
 
 ```php
 $encrypter = Encryption::use($key);
