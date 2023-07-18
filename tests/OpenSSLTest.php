@@ -3,16 +3,16 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use
-    Fyre\Encryption\Encryption,
-    Fyre\Encryption\Handlers\OpenSSLEncrypter,
-    PHPUnit\Framework\TestCase;
+use Fyre\Encryption\Encryption;
+use Fyre\Encryption\Handlers\OpenSSLEncrypter;
+use PHPUnit\Framework\TestCase;
+
+use function strlen;
 
 final class OpenSSLTest extends TestCase
 {
 
-    use
-        EncrypterTest;
+    use EncrypterTestTrait;
 
     public function testGenerateKey(): void
     {

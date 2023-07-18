@@ -1,6 +1,6 @@
 # FyreEncryption
 
-**FyreEncryption** is a free, encryption library for *PHP*.
+**FyreEncryption** is a free, open-source encryption library for *PHP*.
 
 
 ## Table Of Contents
@@ -39,30 +39,53 @@ Encryption::clear();
 
 **Get Config**
 
-Set an [*Encrypter*](#encrypters) config.
+Get an [*Encrypter*](#encrypters) config.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
 
 ```php
 $config = Encryption::getConfig($key);
-```
-
-Alternatively, if the `$key` argument is omitted an array containing all configurations will be returned.
-
-```php
-$config = Encryption::getConfig();
 ```
 
 **Get Key**
 
 Get the key for an [*Encrypter*](#encrypters) instance.
 
-- `$encrypter` is a [*Encrypter*](#encrypters).
+- `$encrypter` is an [*Encrypter*](#encrypters).
 
 ```php
 $key = Encryption::getKey($encrypter);
 ```
 
+**Has Config**
+
+Check if an [*Encrypter*](#encrypters) config exists.
+
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
+
+```php
+$hasConfig = Encryption::hasConfig($key);
+```
+
+**Init Config**
+
+Initialize a set of config options.
+
+- `$config` is an array containing key/value pairs of config options.
+
+```php
+Encryption::initConfig($config);
+```
+
+**Is Loaded**
+
+Check if an [*Encrypter*](#encrypters) instance is loaded.
+
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
+
+```php
+$isLoaded = Encryption::isLoaded($key);
+```
 **Load**
 
 Load an [*Encrypter*](#encrypters).
@@ -84,27 +107,21 @@ Set the [*Encrypter*](#encrypters) config.
 Encryption::setConfig($key, $options);
 ```
 
-Alternatively, a single array can be provided containing key/value of configuration options.
-
-```php
-Encryption::setConfig($config);
-```
-
 **Unload**
 
 Unload an [*Encrypter*](#encrypters).
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *"default"*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
 
 ```php
-Encryption::unload($key);
+$unloaded = Encryption::unload($key);
 ```
 
 **Use**
 
 Load a shared [*Encrypter*](#encrypters) instance.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *"default"*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
 
 ```php
 $encrypter = Encryption::use($key);
@@ -160,7 +177,7 @@ You can also load the encrypter using custom configuration.
 
 - `$key` is a string representing the encrypter key.
 - `$options` is an array containing configuration options.
-    - `className` must be set to `\Fyre\Encryption\Handlers\OpenSSLEncrypter`.
+    - `className` must be set to `\Fyre\Encryption\Handlers\OpenSSLEncrypter::class`.
     - `cipher` is a string indicating the cipher, and will default to "*AES-256-CTR*".
 
 ```php
@@ -182,7 +199,7 @@ You can also load the encrypter using custom configuration.
 
 - `$key` is a string representing the encrypter key.
 - `$options` is an array containing configuration options.
-    - `className` must be set to `\Fyre\Encryption\Handlers\SodiumEncrypter`.
+    - `className` must be set to `\Fyre\Encryption\Handlers\SodiumEncrypter::class`.
     - `blockSize` is a number indicating the block size, and will default to *16*.
 
 ```php

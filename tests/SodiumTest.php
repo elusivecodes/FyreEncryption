@@ -3,16 +3,18 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use
-    Fyre\Encryption\Encryption,
-    Fyre\Encryption\Handlers\SodiumEncrypter,
-    PHPUnit\Framework\TestCase;
+use Fyre\Encryption\Encryption;
+use Fyre\Encryption\Handlers\SodiumEncrypter;
+use PHPUnit\Framework\TestCase;
+
+use const SODIUM_CRYPTO_SECRETBOX_KEYBYTES;
+
+use function strlen;
 
 final class SodiumTest extends TestCase
 {
 
-    use
-        EncrypterTest;
+    use EncrypterTestTrait;
 
     public function testGenerateKey(): void
     {

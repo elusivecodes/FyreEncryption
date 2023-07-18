@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use
-    Fyre\Encryption\Encrypter,
-    Fyre\Encryption\Exceptions\EncryptionException;
+use Fyre\Encryption\Encrypter;
+use Fyre\Encryption\Exceptions\EncryptionException;
 
-trait EncrypterTest
+trait EncrypterTestTrait
 {
 
     protected Encrypter $encrypter;

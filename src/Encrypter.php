@@ -3,11 +3,10 @@ declare(strict_types=1);
 
 namespace Fyre\Encryption;
 
-use function
-    array_replace_recursive,
-    hash_hkdf,
-    hash_hmac,
-    mb_substr;
+use function array_replace;
+use function hash_hkdf;
+use function hash_hmac;
+use function mb_substr;
 
 /**
  * Encrypter
@@ -27,7 +26,7 @@ abstract class Encrypter
      */
     public function __construct(array $options = [])
     {
-        $this->config = array_replace_recursive(self::$defaults, static::$defaults, $options);
+        $this->config = array_replace(self::$defaults, static::$defaults, $options);
     }
 
     /**

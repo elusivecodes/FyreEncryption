@@ -3,22 +3,21 @@ declare(strict_types=1);
 
 namespace Fyre\Encryption;
 
-use
-    Fyre\Encryption\Exceptions\EncryptionException,
-    Fyre\Encryption\Handlers\OpenSSLEncrypter,
-    Fyre\Encryption\Handlers\SodiumEncrypter;
+use Fyre\Encryption\Exceptions\EncryptionException;
+use Fyre\Encryption\Handlers\OpenSSLEncrypter;
+use Fyre\Encryption\Handlers\SodiumEncrypter;
 
-use function
-    array_key_exists,
-    array_search,
-    class_exists,
-    is_array;
+use function array_key_exists;
+use function array_search;
+use function class_exists;
 
 /**
  * Encryption
  */
 abstract class Encryption
 {
+
+    public const DEFAULT = 'default';
 
     protected static array $config = [
         'default' => [
@@ -42,15 +41,11 @@ abstract class Encryption
 
     /**
      * Get the handler config.
-     * @param string|null $key The config key.
+     * @param string $key The config key.
      * @return array|null
      */
-    public static function getConfig(string|null $key = null): array|null
+    public static function getConfig(string $key = self::DEFAULT): array|null
     {
-        if (!$key) {
-            return static::$config;
-        }
-
         return static::$config[$key] ?? null;
     }
 
@@ -62,6 +57,37 @@ abstract class Encryption
     public static function getKey(Encrypter $encrypter): string|null
     {
         return array_search($encrypter, static::$instances, true) ?: null;
+    }
+
+    /**
+     * Determine if a config exists.
+     * @param string $key The config key.
+     * @return bool TRUE if the config exists, otherwise FALSE.
+     */
+    public static function hasConfig(string $key = self::DEFAULT): bool
+    {
+        return array_key_exists($key, static::$config);
+    }
+
+    /**
+     * Initialize a set of configuration options.
+     * @param array $config The configuration options.
+     */
+    public static function initConfig(array $config): void
+    {
+        foreach ($config AS $key => $options) {
+            static::setConfig($key, $options);
+        }
+    }
+
+    /**
+     * Determine if a handler is loaded.
+     * @param string $key The config key.
+     * @return bool TRUE if the handler is loaded, otherwise FALSE.
+     */
+    public static function isLoaded(string $key = self::DEFAULT): bool
+    {
+        return array_key_exists($key, static::$instances);
     }
 
     /**
@@ -85,24 +111,12 @@ abstract class Encryption
 
     /**
      * Set handler config.
-     * @param string|array $key The config key.
-     * @param array|null $options The config options.
+     * @param string $key The config key.
+     * @param array $options The config options.
      * @throws EncryptionException if the config is invalid.
      */
-    public static function setConfig(string|array $key, array|null $options = null): void
+    public static function setConfig(string $key, array $options): void
     {
-        if (is_array($key)) {
-            foreach ($key AS $k => $value) {
-                static::setConfig($k, $value);
-            }
-
-            return;
-        }
-
-        if (!is_array($options)) {
-            throw EncryptionException::forInvalidConfig($key);
-        }
-
         if (array_key_exists($key, static::$config)) {
             throw EncryptionException::forConfigExists($key);
         }
@@ -113,11 +127,18 @@ abstract class Encryption
     /**
      * Unload a handler.
      * @param string $key The config key.
+     * @return bool TRUE if the handler was removed, otherwise FALSE.
      */
-    public static function unload(string $key = 'default'): void
+    public static function unload(string $key = self::DEFAULT): bool
     {
-        unset(static::$instances[$key]);
+        if (!array_key_exists($key, static::$config)) {
+            return false;
+        }
+
         unset(static::$config[$key]);
+        unset(static::$instances[$key]);
+
+        return true;
     }
 
     /**
@@ -125,7 +146,7 @@ abstract class Encryption
      * @param string $key The config key.
      * @return Encrypter The handler.
      */
-    public static function use(string $key = 'default'): Encrypter
+    public static function use(string $key = self::DEFAULT): Encrypter
     {
         return static::$instances[$key] ??= static::load(static::$config[$key] ?? []);
     }

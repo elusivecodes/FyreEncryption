@@ -3,21 +3,18 @@ declare(strict_types=1);
 
 namespace Fyre\Encryption\Handlers;
 
-use
-    Fyre\Encryption\Encrypter,
-    Fyre\Encryption\Exceptions\EncryptionException;
+use Fyre\Encryption\Encrypter;
+use Fyre\Encryption\Exceptions\EncryptionException;
 
-use function
-    hash_equals,
-    openssl_cipher_iv_length,
-    openssl_decrypt,
-    openssl_encrypt,
-    openssl_random_pseudo_bytes,
-    serialize,
-    unserialize;
+use const OPENSSL_RAW_DATA;
 
-use const
-    OPENSSL_RAW_DATA;
+use function hash_equals;
+use function openssl_cipher_iv_length;
+use function openssl_decrypt;
+use function openssl_encrypt;
+use function openssl_random_pseudo_bytes;
+use function serialize;
+use function unserialize;
 
 /**
  * OpenSSLEncrypter

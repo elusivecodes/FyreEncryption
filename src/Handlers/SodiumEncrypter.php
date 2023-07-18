@@ -3,26 +3,23 @@ declare(strict_types=1);
 
 namespace Fyre\Encryption\Handlers;
 
-use
-    Fyre\Encryption\Encrypter,
-    Fyre\Encryption\Exceptions\EncryptionException;
+use Fyre\Encryption\Encrypter;
+use Fyre\Encryption\Exceptions\EncryptionException;
 
-use function
-    hash_equals,
-    mb_strlen,
-    random_bytes,
-    serialize,
-    sodium_crypto_secretbox,
-    sodium_crypto_secretbox_open,
-    sodium_memzero,
-    sodium_pad,
-    sodium_unpad,
-    unserialize;
+use const SODIUM_CRYPTO_SECRETBOX_KEYBYTES;
+use const SODIUM_CRYPTO_SECRETBOX_MACBYTES;
+use const SODIUM_CRYPTO_SECRETBOX_NONCEBYTES;
 
-use const
-    SODIUM_CRYPTO_SECRETBOX_KEYBYTES,
-    SODIUM_CRYPTO_SECRETBOX_MACBYTES,
-    SODIUM_CRYPTO_SECRETBOX_NONCEBYTES;
+use function hash_equals;
+use function mb_strlen;
+use function random_bytes;
+use function serialize;
+use function sodium_crypto_secretbox;
+use function sodium_crypto_secretbox_open;
+use function sodium_memzero;
+use function sodium_pad;
+use function sodium_unpad;
+use function unserialize;
 
 /**
  * SodiumEncrypter

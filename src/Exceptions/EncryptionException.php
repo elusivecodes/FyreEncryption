@@ -3,8 +3,7 @@ declare(strict_types=1);
 
 namespace Fyre\Encryption\Exceptions;
 
-use
-    RuntimeException;
+use RuntimeException;
 
 /**
  * EncryptionException
@@ -30,11 +29,6 @@ class EncryptionException extends RuntimeException
     public static function forInvalidClass(string $className = '')
     {
         return new static('Encryption handler class not found: '.$className);
-    }
-
-    public static function forInvalidConfig(string $key)
-    {
-        return new static('Encryption handler invalid config: '.$key);
     }
 
 }

@@ -3,13 +3,12 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use
-    Fyre\Encryption\Encryption,
-    Fyre\Encryption\Exceptions\EncryptionException,
-    Fyre\Encryption\Handlers\OpenSSLEncrypter,
-    Fyre\Encryption\Handlers\SodiumEncrypter,
-    PHPUnit\Framework\TestCase,
-    Tests\Mock\MockEncrypter;
+use Fyre\Encryption\Encryption;
+use Fyre\Encryption\Exceptions\EncryptionException;
+use Fyre\Encryption\Handlers\OpenSSLEncrypter;
+use Fyre\Encryption\Handlers\SodiumEncrypter;
+use PHPUnit\Framework\TestCase;
+use Tests\Mock\MockEncrypter;
 
 final class EncryptionTest extends TestCase
 {
@@ -18,12 +17,7 @@ final class EncryptionTest extends TestCase
     {
         $this->assertSame(
             [
-                'default' => [
-                    'className' => SodiumEncrypter::class
-                ],
-                'openssl' => [
-                    'className' => OpenSSLEncrypter::class
-                ]
+                'className' => SodiumEncrypter::class
             ],
             Encryption::getConfig()
         );
@@ -33,9 +27,9 @@ final class EncryptionTest extends TestCase
     {
         $this->assertSame(
             [
-                'className' => SodiumEncrypter::class
+                'className' => OpenSSLEncrypter::class
             ],
-            Encryption::getConfig('default')
+            Encryption::getConfig('openssl')
         );
     }
 
@@ -55,9 +49,33 @@ final class EncryptionTest extends TestCase
             'className' => SodiumEncrypter::class
         ]);
 
-        $this->assertSame(
-            null,
+        $this->assertNull(
             Encryption::getKey($handler)
+        );
+    }
+
+    public function testIsLoaded(): void
+    {
+        Encryption::use();
+        
+        $this->assertTrue(
+            Encryption::isLoaded()
+        );
+    }
+
+    public function testIsLoadedKey(): void
+    {
+        Encryption::use('openssl');
+        
+        $this->assertTrue(
+            Encryption::isLoaded('openssl')
+        );
+    }
+
+    public function testIsLoadedInvalid(): void
+    {
+        $this->assertFalse(
+            Encryption::isLoaded('test')
         );
     }
 
@@ -82,10 +100,8 @@ final class EncryptionTest extends TestCase
 
     public function testSetConfig(): void
     {
-        Encryption::setConfig([
-            'test' => [
-                'className' => SodiumEncrypter::class
-            ]
+        Encryption::setConfig('test', [
+            'className' => SodiumEncrypter::class
         ]);
 
         $this->assertSame(
@@ -105,6 +121,45 @@ final class EncryptionTest extends TestCase
         ]);
     }
 
+    public function testUnload(): void
+    {
+        Encryption::use();
+
+        $this->assertTrue(
+            Encryption::unload()
+        );
+
+        $this->assertFalse(
+            Encryption::isLoaded()
+        );
+        $this->assertFalse(
+            Encryption::hasConfig()
+        );
+    }
+
+    public function testUnloadKey(): void
+    {
+        Encryption::use('openssl');
+
+        $this->assertTrue(
+            Encryption::unload('openssl')
+        );
+
+        $this->assertFalse(
+            Encryption::isLoaded('openssl')
+        );
+        $this->assertFalse(
+            Encryption::hasConfig('openssl')
+        );
+    }
+
+    public function testUnloadInvalid(): void
+    {
+        $this->assertFalse(
+            Encryption::unload('test')
+        );
+    }
+
     public function testUse(): void
     {
         $handler1 = Encryption::use();
@@ -122,12 +177,13 @@ final class EncryptionTest extends TestCase
     {
         Encryption::clear();
 
-        Encryption::setConfig('default', [
-            'className' => SodiumEncrypter::class
-        ]);
-
-        Encryption::setConfig('openssl', [
-            'className' => OpenSSLEncrypter::class
+        Encryption::initConfig([
+            'default' => [
+                'className' => SodiumEncrypter::class
+            ],
+            'openssl' => [
+                'className' => OpenSSLEncrypter::class
+            ]
         ]);
     }
 
