@@ -31,4 +31,9 @@ class EncryptionException extends RuntimeException
         return new static('Encryption handler class not found: '.$className);
     }
 
+    public static function forInvalidConfig(string $key)
+    {
+        return new static('Encryption handler invalid config: '.$key);
+    }
+
 }

@@ -41,10 +41,16 @@ Encryption::clear();
 
 Get an [*Encrypter*](#encrypters) config.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key.
 
 ```php
 $config = Encryption::getConfig($key);
+```
+
+Alternatively, if the `$key` argument is omitted an array containing all configurations will be returned.
+
+```php
+$config = Encryption::getConfig();
 ```
 
 **Get Key**
@@ -61,27 +67,17 @@ $key = Encryption::getKey($encrypter);
 
 Check if an [*Encrypter*](#encrypters) config exists.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `Encryption::DEFAULT`.
 
 ```php
 $hasConfig = Encryption::hasConfig($key);
-```
-
-**Init Config**
-
-Initialize a set of config options.
-
-- `$config` is an array containing key/value pairs of config options.
-
-```php
-Encryption::initConfig($config);
 ```
 
 **Is Loaded**
 
 Check if an [*Encrypter*](#encrypters) instance is loaded.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `Encryption::DEFAULT`.
 
 ```php
 $isLoaded = Encryption::isLoaded($key);
@@ -107,11 +103,17 @@ Set the [*Encrypter*](#encrypters) config.
 Encryption::setConfig($key, $options);
 ```
 
+Alternatively, a single array can be provided containing key/value of configuration options.
+
+```php
+Encryption::setConfig($config);
+```
+
 **Unload**
 
 Unload an [*Encrypter*](#encrypters).
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `Encryption::DEFAULT`.
 
 ```php
 $unloaded = Encryption::unload($key);
@@ -121,7 +123,7 @@ $unloaded = Encryption::unload($key);
 
 Load a shared [*Encrypter*](#encrypters) instance.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to *Encryption::DEFAULT*.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `Encryption::DEFAULT`.
 
 ```php
 $encrypter = Encryption::use($key);

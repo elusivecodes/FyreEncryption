@@ -17,7 +17,12 @@ final class EncryptionTest extends TestCase
     {
         $this->assertSame(
             [
-                'className' => SodiumEncrypter::class
+                'default' => [
+                    'className' => SodiumEncrypter::class
+                ],
+                'openssl' => [
+                    'className' => OpenSSLEncrypter::class
+                ]
             ],
             Encryption::getConfig()
         );
@@ -177,7 +182,7 @@ final class EncryptionTest extends TestCase
     {
         Encryption::clear();
 
-        Encryption::initConfig([
+        Encryption::setConfig([
             'default' => [
                 'className' => SodiumEncrypter::class
             ],
