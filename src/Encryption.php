@@ -45,7 +45,7 @@ abstract class Encryption
      * @param string|null $key The config key.
      * @return array|null
      */
-    public static function getConfig(string $key = null): array|null
+    public static function getConfig(string|null $key = null): array|null
     {
         if ($key === null) {
             return static::$config;
