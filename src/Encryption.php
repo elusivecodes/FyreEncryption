@@ -141,8 +141,8 @@ abstract class Encryption
             return false;
         }
 
-        unset(static::$config[$key]);
         unset(static::$instances[$key]);
+        unset(static::$config[$key]);
 
         return true;
     }
