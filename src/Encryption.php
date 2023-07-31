@@ -88,7 +88,7 @@ abstract class Encryption
      * Load a handler.
      * @param array $options Options for the handler.
      * @return Encrypter The handler.
-     * @throws EncryptionException if the handler is invalid.
+     * @throws EncryptionException if the handler is not valid.
      */
     public static function load(array $options = []): Encrypter
     {
@@ -107,7 +107,7 @@ abstract class Encryption
      * Set handler config.
      * @param string|array $key The config key.
      * @param array|null $options The config options.
-     * @throws EncryptionException if the config is invalid.
+     * @throws EncryptionException if the config is not valid.
      */
     public static function setConfig(string|array $key, array|null $options = null): void
     {
