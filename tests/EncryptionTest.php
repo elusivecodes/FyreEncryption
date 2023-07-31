@@ -8,7 +8,6 @@ use Fyre\Encryption\Exceptions\EncryptionException;
 use Fyre\Encryption\Handlers\OpenSSLEncrypter;
 use Fyre\Encryption\Handlers\SodiumEncrypter;
 use PHPUnit\Framework\TestCase;
-use Tests\Mock\MockEncrypter;
 
 final class EncryptionTest extends TestCase
 {
