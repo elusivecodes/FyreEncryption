@@ -46,7 +46,7 @@ class SodiumEncrypter extends Encrypter
 
         $secret = $this->generateSecret($key, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
 
-        $hmacLength = $this->getHmacLength();
+        $hmacLength = (int) $this->getHmacLength();
         $hmacKey = static::substr($data, 0, $hmacLength);
         $data = static::substr($data, $hmacLength);
 
