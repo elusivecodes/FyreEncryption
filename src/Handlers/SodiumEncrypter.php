@@ -6,10 +6,6 @@ namespace Fyre\Encryption\Handlers;
 use Fyre\Encryption\Encrypter;
 use Fyre\Encryption\Exceptions\EncryptionException;
 
-use const SODIUM_CRYPTO_SECRETBOX_KEYBYTES;
-use const SODIUM_CRYPTO_SECRETBOX_MACBYTES;
-use const SODIUM_CRYPTO_SECRETBOX_NONCEBYTES;
-
 use function hash_equals;
 use function mb_strlen;
 use function random_bytes;
@@ -21,12 +17,15 @@ use function sodium_pad;
 use function sodium_unpad;
 use function unserialize;
 
+use const SODIUM_CRYPTO_SECRETBOX_KEYBYTES;
+use const SODIUM_CRYPTO_SECRETBOX_MACBYTES;
+use const SODIUM_CRYPTO_SECRETBOX_NONCEBYTES;
+
 /**
  * SodiumEncrypter
  */
 class SodiumEncrypter extends Encrypter
 {
-
     protected static array $defaults = [
         'blockSize' => 16
     ];
@@ -109,5 +108,4 @@ class SodiumEncrypter extends Encrypter
     {
         return random_bytes($length ?? SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
     }
-
 }

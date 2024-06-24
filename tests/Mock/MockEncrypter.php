@@ -6,7 +6,6 @@ use Fyre\Encryption\Encrypter;
 
 class MockEncrypter extends Encrypter
 {
-
     public function decrypt(string $data, string $key): mixed
     {
         return '';
@@ -21,5 +20,4 @@ class MockEncrypter extends Encrypter
     {
         return '';
     }
-
 }

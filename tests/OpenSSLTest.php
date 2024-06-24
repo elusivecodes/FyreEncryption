@@ -11,8 +11,14 @@ use function strlen;
 
 final class OpenSSLTest extends TestCase
 {
-
     use EncrypterTestTrait;
+
+    protected function setUp(): void
+    {
+        $this->encrypter = Encryption::load([
+            'className' => OpenSSLEncrypter::class
+        ]);
+    }
 
     public function testGenerateKey(): void
     {
@@ -23,12 +29,4 @@ final class OpenSSLTest extends TestCase
             strlen($key)
         );
     }
-
-    protected function setUp(): void
-    {
-        $this->encrypter = Encryption::load([
-            'className' => OpenSSLEncrypter::class
-        ]);
-    }
-
 }

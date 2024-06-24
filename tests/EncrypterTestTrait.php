@@ -8,7 +8,6 @@ use Fyre\Encryption\Exceptions\EncryptionException;
 
 trait EncrypterTestTrait
 {
-
     protected Encrypter $encrypter;
 
     public function testEncryption(): void
@@ -35,14 +34,6 @@ trait EncrypterTestTrait
         $this->assertSame($data, $decrypted);
     }
 
-    public function testInvalidKey(): void
-    {
-        $this->expectException(EncryptionException::class);
-
-        $encrypted = $this->encrypter->encrypt('This is a sample string', 'abc123');
-        $this->encrypter->decrypt($encrypted, 'invalid');
-    }
-
     public function testGenerateKeyRandom(): void
     {
         $key1 = $this->encrypter->generateKey();
@@ -51,4 +42,11 @@ trait EncrypterTestTrait
         $this->assertNotSame($key1, $key2);
     }
 
+    public function testInvalidKey(): void
+    {
+        $this->expectException(EncryptionException::class);
+
+        $encrypted = $this->encrypter->encrypt('This is a sample string', 'abc123');
+        $this->encrypter->decrypt($encrypted, 'invalid');
+    }
 }

@@ -17,7 +17,6 @@ use function is_array;
  */
 abstract class Encryption
 {
-
     public const DEFAULT = 'default';
 
     protected static array $config = [
@@ -109,10 +108,10 @@ abstract class Encryption
      * @param array|null $options The config options.
      * @throws EncryptionException if the config is not valid.
      */
-    public static function setConfig(string|array $key, array|null $options = null): void
+    public static function setConfig(array|string $key, array|null $options = null): void
     {
         if (is_array($key)) {
-            foreach ($key AS $k => $v) {
+            foreach ($key as $k => $v) {
                 static::setConfig($k, $v);
             }
 
@@ -156,5 +155,4 @@ abstract class Encryption
     {
         return static::$instances[$key] ??= static::load(static::$config[$key] ?? []);
     }
-
 }

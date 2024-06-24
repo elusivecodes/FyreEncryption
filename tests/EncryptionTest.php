@@ -11,6 +11,19 @@ use PHPUnit\Framework\TestCase;
 
 final class EncryptionTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        Encryption::clear();
+
+        Encryption::setConfig([
+            'default' => [
+                'className' => SodiumEncrypter::class
+            ],
+            'openssl' => [
+                'className' => OpenSSLEncrypter::class
+            ]
+        ]);
+    }
 
     public function testGetConfig(): void
     {
@@ -61,18 +74,9 @@ final class EncryptionTest extends TestCase
     public function testIsLoaded(): void
     {
         Encryption::use();
-        
+
         $this->assertTrue(
             Encryption::isLoaded()
-        );
-    }
-
-    public function testIsLoadedKey(): void
-    {
-        Encryption::use('openssl');
-        
-        $this->assertTrue(
-            Encryption::isLoaded('openssl')
         );
     }
 
@@ -80,6 +84,15 @@ final class EncryptionTest extends TestCase
     {
         $this->assertFalse(
             Encryption::isLoaded('test')
+        );
+    }
+
+    public function testIsLoadedKey(): void
+    {
+        Encryption::use('openssl');
+
+        $this->assertTrue(
+            Encryption::isLoaded('openssl')
         );
     }
 
@@ -141,6 +154,13 @@ final class EncryptionTest extends TestCase
         );
     }
 
+    public function testUnloadInvalid(): void
+    {
+        $this->assertFalse(
+            Encryption::unload('test')
+        );
+    }
+
     public function testUnloadKey(): void
     {
         Encryption::use('openssl');
@@ -157,13 +177,6 @@ final class EncryptionTest extends TestCase
         );
     }
 
-    public function testUnloadInvalid(): void
-    {
-        $this->assertFalse(
-            Encryption::unload('test')
-        );
-    }
-
     public function testUse(): void
     {
         $handler1 = Encryption::use();
@@ -176,19 +189,4 @@ final class EncryptionTest extends TestCase
             $handler1
         );
     }
-
-    protected function setUp(): void
-    {
-        Encryption::clear();
-
-        Encryption::setConfig([
-            'default' => [
-                'className' => SodiumEncrypter::class
-            ],
-            'openssl' => [
-                'className' => OpenSSLEncrypter::class
-            ]
-        ]);
-    }
-
 }

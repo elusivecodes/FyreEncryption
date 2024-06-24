@@ -7,14 +7,20 @@ use Fyre\Encryption\Encryption;
 use Fyre\Encryption\Handlers\SodiumEncrypter;
 use PHPUnit\Framework\TestCase;
 
-use const SODIUM_CRYPTO_SECRETBOX_KEYBYTES;
-
 use function strlen;
+
+use const SODIUM_CRYPTO_SECRETBOX_KEYBYTES;
 
 final class SodiumTest extends TestCase
 {
-
     use EncrypterTestTrait;
+
+    protected function setUp(): void
+    {
+        $this->encrypter = Encryption::load([
+            'className' => SodiumEncrypter::class
+        ]);
+    }
 
     public function testGenerateKey(): void
     {
@@ -25,12 +31,4 @@ final class SodiumTest extends TestCase
             strlen($key)
         );
     }
-
-    protected function setUp(): void
-    {
-        $this->encrypter = Encryption::load([
-            'className' => SodiumEncrypter::class
-        ]);
-    }
-
 }

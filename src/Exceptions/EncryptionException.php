@@ -10,7 +10,6 @@ use RuntimeException;
  */
 class EncryptionException extends RuntimeException
 {
-
     public static function forConfigExists(string $key): static
     {
         return new static('Encryption handler config already exists: '.$key);
@@ -35,5 +34,4 @@ class EncryptionException extends RuntimeException
     {
         return new static('Encryption handler invalid config: '.$key);
     }
-
 }

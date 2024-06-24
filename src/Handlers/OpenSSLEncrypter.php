@@ -6,8 +6,6 @@ namespace Fyre\Encryption\Handlers;
 use Fyre\Encryption\Encrypter;
 use Fyre\Encryption\Exceptions\EncryptionException;
 
-use const OPENSSL_RAW_DATA;
-
 use function hash_equals;
 use function openssl_cipher_iv_length;
 use function openssl_decrypt;
@@ -16,12 +14,13 @@ use function openssl_random_pseudo_bytes;
 use function serialize;
 use function unserialize;
 
+use const OPENSSL_RAW_DATA;
+
 /**
  * OpenSSLEncrypter
  */
 class OpenSSLEncrypter extends Encrypter
 {
-
     protected static array $defaults = [
         'cipher' => 'AES-256-CTR'
     ];
@@ -37,7 +36,7 @@ class OpenSSLEncrypter extends Encrypter
     {
         $secret = $this->generateSecret($key);
 
-        $hmacLength = $this->getHmacLength();
+        $hmacLength = (int) $this->getHmacLength();
         $hmacKey = static::substr($data, 0, $hmacLength);
         $data = static::substr($data, $hmacLength);
 
@@ -108,5 +107,4 @@ class OpenSSLEncrypter extends Encrypter
     {
         return openssl_cipher_iv_length($this->config['cipher']);
     }
-
 }

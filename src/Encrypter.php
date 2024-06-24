@@ -13,12 +13,11 @@ use function mb_substr;
  */
 abstract class Encrypter
 {
+    protected array $config;
 
     protected static array $defaults = [
         'digest' => 'SHA512'
     ];
-
-    protected array $config;
 
     /**
      * New Encrypter constructor.
@@ -103,5 +102,4 @@ abstract class Encrypter
     {
         return mb_substr($string, $start, $length, '8bit');
     }
-
 }
