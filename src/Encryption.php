@@ -21,11 +21,11 @@ abstract class Encryption
 
     protected static array $config = [
         'default' => [
-            'className' => SodiumEncrypter::class
+            'className' => SodiumEncrypter::class,
         ],
         'openssl' => [
-            'className' => OpenSSLEncrypter::class
-        ]
+            'className' => OpenSSLEncrypter::class,
+        ],
     ];
 
     protected static array $instances = [];
@@ -41,8 +41,8 @@ abstract class Encryption
 
     /**
      * Get the handler config.
+     *
      * @param string|null $key The config key.
-     * @return array|null
      */
     public static function getConfig(string|null $key = null): array|null
     {
@@ -55,6 +55,7 @@ abstract class Encryption
 
     /**
      * Get the key for an encrypter instance.
+     *
      * @param Encrypter $encrypter The Encrypter.
      * @return string|null The encrypter key.
      */
@@ -65,6 +66,7 @@ abstract class Encryption
 
     /**
      * Determine if a config exists.
+     *
      * @param string $key The config key.
      * @return bool TRUE if the config exists, otherwise FALSE.
      */
@@ -75,6 +77,7 @@ abstract class Encryption
 
     /**
      * Determine if a handler is loaded.
+     *
      * @param string $key The config key.
      * @return bool TRUE if the handler is loaded, otherwise FALSE.
      */
@@ -85,8 +88,10 @@ abstract class Encryption
 
     /**
      * Load a handler.
+     *
      * @param array $options Options for the handler.
      * @return Encrypter The handler.
+     *
      * @throws EncryptionException if the handler is not valid.
      */
     public static function load(array $options = []): Encrypter
@@ -104,8 +109,10 @@ abstract class Encryption
 
     /**
      * Set handler config.
+     *
      * @param string|array $key The config key.
      * @param array|null $options The config options.
+     *
      * @throws EncryptionException if the config is not valid.
      */
     public static function setConfig(array|string $key, array|null $options = null): void
@@ -131,6 +138,7 @@ abstract class Encryption
 
     /**
      * Unload a handler.
+     *
      * @param string $key The config key.
      * @return bool TRUE if the handler was removed, otherwise FALSE.
      */
@@ -148,6 +156,7 @@ abstract class Encryption
 
     /**
      * Load a shared handler instance.
+     *
      * @param string $key The config key.
      * @return Encrypter The handler.
      */

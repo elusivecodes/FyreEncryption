@@ -15,13 +15,6 @@ final class SodiumTest extends TestCase
 {
     use EncrypterTestTrait;
 
-    protected function setUp(): void
-    {
-        $this->encrypter = Encryption::load([
-            'className' => SodiumEncrypter::class
-        ]);
-    }
-
     public function testGenerateKey(): void
     {
         $key = $this->encrypter->generateKey();
@@ -30,5 +23,12 @@ final class SodiumTest extends TestCase
             SODIUM_CRYPTO_SECRETBOX_KEYBYTES,
             strlen($key)
         );
+    }
+
+    protected function setUp(): void
+    {
+        $this->encrypter = Encryption::load([
+            'className' => SodiumEncrypter::class,
+        ]);
     }
 }

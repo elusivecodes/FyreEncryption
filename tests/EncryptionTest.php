@@ -11,30 +11,16 @@ use PHPUnit\Framework\TestCase;
 
 final class EncryptionTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        Encryption::clear();
-
-        Encryption::setConfig([
-            'default' => [
-                'className' => SodiumEncrypter::class
-            ],
-            'openssl' => [
-                'className' => OpenSSLEncrypter::class
-            ]
-        ]);
-    }
-
     public function testGetConfig(): void
     {
         $this->assertSame(
             [
                 'default' => [
-                    'className' => SodiumEncrypter::class
+                    'className' => SodiumEncrypter::class,
                 ],
                 'openssl' => [
-                    'className' => OpenSSLEncrypter::class
-                ]
+                    'className' => OpenSSLEncrypter::class,
+                ],
             ],
             Encryption::getConfig()
         );
@@ -44,7 +30,7 @@ final class EncryptionTest extends TestCase
     {
         $this->assertSame(
             [
-                'className' => OpenSSLEncrypter::class
+                'className' => OpenSSLEncrypter::class,
             ],
             Encryption::getConfig('openssl')
         );
@@ -63,7 +49,7 @@ final class EncryptionTest extends TestCase
     public function testGetKeyInvalid(): void
     {
         $handler = Encryption::load([
-            'className' => SodiumEncrypter::class
+            'className' => SodiumEncrypter::class,
         ]);
 
         $this->assertNull(
@@ -101,7 +87,7 @@ final class EncryptionTest extends TestCase
         $this->assertInstanceOf(
             SodiumEncrypter::class,
             Encryption::load([
-                'className' => SodiumEncrypter::class
+                'className' => SodiumEncrypter::class,
             ])
         );
     }
@@ -111,19 +97,19 @@ final class EncryptionTest extends TestCase
         $this->expectException(EncryptionException::class);
 
         Encryption::load([
-            'className' => 'Invalid'
+            'className' => 'Invalid',
         ]);
     }
 
     public function testSetConfig(): void
     {
         Encryption::setConfig('test', [
-            'className' => SodiumEncrypter::class
+            'className' => SodiumEncrypter::class,
         ]);
 
         $this->assertSame(
             [
-                'className' => SodiumEncrypter::class
+                'className' => SodiumEncrypter::class,
             ],
             Encryption::getConfig('test')
         );
@@ -134,7 +120,7 @@ final class EncryptionTest extends TestCase
         $this->expectException(EncryptionException::class);
 
         Encryption::setConfig('default', [
-            'className' => SodiumEncrypter::class
+            'className' => SodiumEncrypter::class,
         ]);
     }
 
@@ -188,5 +174,19 @@ final class EncryptionTest extends TestCase
             SodiumEncrypter::class,
             $handler1
         );
+    }
+
+    protected function setUp(): void
+    {
+        Encryption::clear();
+
+        Encryption::setConfig([
+            'default' => [
+                'className' => SodiumEncrypter::class,
+            ],
+            'openssl' => [
+                'className' => OpenSSLEncrypter::class,
+            ],
+        ]);
     }
 }

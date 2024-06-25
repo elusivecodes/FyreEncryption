@@ -27,14 +27,16 @@ use const SODIUM_CRYPTO_SECRETBOX_NONCEBYTES;
 class SodiumEncrypter extends Encrypter
 {
     protected static array $defaults = [
-        'blockSize' => 16
+        'blockSize' => 16,
     ];
 
     /**
      * Decrypt data.
+     *
      * @param string $data The encrypted data.
      * @param string $key The encryption key.
      * @return mixed The decrypted data.
+     *
      * @throws EncryptionException if decryption fails.
      */
     public function decrypt(string $data, string $key): mixed
@@ -74,6 +76,7 @@ class SodiumEncrypter extends Encrypter
 
     /**
      * Encrypt data.
+     *
      * @param mixed $data The data to encrypt.
      * @param string $key The encryption key.
      * @return string The encrypted data.
@@ -101,6 +104,7 @@ class SodiumEncrypter extends Encrypter
 
     /**
      * Generate an encryption key.
+     *
      * @param int|null $length The key length.
      * @return string The encryption key.
      */

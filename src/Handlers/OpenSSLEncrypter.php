@@ -22,14 +22,16 @@ use const OPENSSL_RAW_DATA;
 class OpenSSLEncrypter extends Encrypter
 {
     protected static array $defaults = [
-        'cipher' => 'AES-256-CTR'
+        'cipher' => 'AES-256-CTR',
     ];
 
     /**
      * Decrypt data.
+     *
      * @param string $data The encrypted data.
      * @param string $key The encryption key.
      * @return mixed The decrypted data.
+     *
      * @throws EncryptionException if decryption fails.
      */
     public function decrypt(string $data, string $key): mixed
@@ -57,9 +59,11 @@ class OpenSSLEncrypter extends Encrypter
 
     /**
      * Encrypt data.
+     *
      * @param mixed $data The data to encrypt.
      * @param string $key The encryption key.
      * @return string The encrypted data.
+     *
      * @throws EncryptionException if encryption fails.
      */
     public function encrypt(mixed $data, string $key): string
@@ -85,6 +89,7 @@ class OpenSSLEncrypter extends Encrypter
 
     /**
      * Generate an encryption key.
+     *
      * @param int|null $length The key length.
      * @return string The encryption key.
      */
@@ -101,6 +106,7 @@ class OpenSSLEncrypter extends Encrypter
 
     /**
      * Get the cipher length.
+     *
      * @return int The cipher length.
      */
     protected function getCipherLength(): int

@@ -13,14 +13,15 @@ use function mb_substr;
  */
 abstract class Encrypter
 {
-    protected array $config;
-
     protected static array $defaults = [
-        'digest' => 'SHA512'
+        'digest' => 'SHA512',
     ];
+
+    protected array $config;
 
     /**
      * New Encrypter constructor.
+     *
      * @param array $options Options for the handler.
      */
     public function __construct(array $options = [])
@@ -30,6 +31,7 @@ abstract class Encrypter
 
     /**
      * Decrypt data.
+     *
      * @param string $data The encrypted data.
      * @param string $key The encryption key.
      * @return mixed The decrypted data.
@@ -38,6 +40,7 @@ abstract class Encrypter
 
     /**
      * Encrypt data.
+     *
      * @param mixed $data The data to encrypt.
      * @param string $key The encryption key.
      * @return string The encrypted data.
@@ -46,6 +49,7 @@ abstract class Encrypter
 
     /**
      * Generate an encryption key.
+     *
      * @param int|null $length The key length.
      * @return string The encryption key.
      */
@@ -53,6 +57,7 @@ abstract class Encrypter
 
     /**
      * Get the config.
+     *
      * @return array The config.
      */
     public function getConfig(): array
@@ -62,6 +67,7 @@ abstract class Encrypter
 
     /**
      * Generate a secret key.
+     *
      * @param string $key The encryption key.
      * @param int $length The key length.
      * @return string The secret key.
@@ -73,6 +79,7 @@ abstract class Encrypter
 
     /**
      * Get the HMAC.
+     *
      * @param string $data The data to hash.
      * @param string $secret The secret key.
      * @return string The hash value.
@@ -84,6 +91,7 @@ abstract class Encrypter
 
     /**
      * Get the HMAC length.
+     *
      * @return string The HMAC length.
      */
     protected function getHmacLength(): int
@@ -93,6 +101,7 @@ abstract class Encrypter
 
     /**
      * Multi-byte substr.
+     *
      * @param string $string The input string.
      * @param int $start The starting offset.
      * @param int|null $length The maximum length to return.
