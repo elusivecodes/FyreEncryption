@@ -110,7 +110,7 @@ abstract class Encryption
     /**
      * Set handler config.
      *
-     * @param string|array $key The config key.
+     * @param array|string $key The config key.
      * @param array|null $options The config options.
      *
      * @throws EncryptionException if the config is not valid.
