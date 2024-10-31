@@ -174,7 +174,8 @@ You can also load the OpenSSL encrypter using custom configuration.
 
 - `$options` is an array containing configuration options.
     - `className` must be set to `\Fyre\Encryption\Handlers\OpenSSLEncrypter::class`.
-    - `cipher` is a string indicating the cipher, and will default to "*AES-256-CTR*".
+    - `cipher` is a string representing the cipher, and will default to "*AES-256-CTR*".
+    - `digest` is a string representing the digest, and will default to "*SHA512*".
 
 ```php
 $encrypter = $encryptionManager->build($options);
@@ -193,7 +194,8 @@ You can also load the Sodium encrypter using custom configuration.
 
 - `$options` is an array containing configuration options.
     - `className` must be set to `\Fyre\Encryption\Handlers\SodiumEncrypter::class`.
-    - `cipher` is a string indicating the cipher, and will default to "*AES-256-CTR*".
+    - `blockSize` is a number representing the block size, and will default to *16*.
+    - `digest` is a string representing the digest, and will default to "*SHA512*".
 
 ```php
 $encrypter = $encryptionManager->build($options);
