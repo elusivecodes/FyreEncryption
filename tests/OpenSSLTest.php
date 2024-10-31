@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Fyre\Encryption\Encryption;
+use Fyre\Encryption\EncryptionManager;
 use Fyre\Encryption\Handlers\OpenSSLEncrypter;
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +25,7 @@ final class OpenSSLTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->encrypter = Encryption::load([
+        $this->encrypter = (new EncryptionManager())->build([
             'className' => OpenSSLEncrypter::class,
         ]);
     }
