@@ -75,7 +75,7 @@ $config = $encryptionManager->getConfig();
 
 **Has Config**
 
-Check if an [*Encrypter*](#encrypters) config exists.
+Determine whether an [*Encrypter*](#encrypters) config exists.
 
 - `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `EncryptionManager::DEFAULT`.
 
@@ -85,7 +85,7 @@ $hasConfig = $encryptionManager->hasConfig($key);
 
 **Is Loaded**
 
-Check if an [*Encrypter*](#encrypters) instance is loaded.
+Determine whether an [*Encrypter*](#encrypters) instance is loaded.
 
 - `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `EncryptionManager::DEFAULT`.
 
