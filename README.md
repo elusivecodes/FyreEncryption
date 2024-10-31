@@ -77,7 +77,7 @@ $config = $encryptionManager->getConfig();
 
 Check if an [*Encrypter*](#encrypters) config exists.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `Encryption::DEFAULT`.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `EncryptionManager::DEFAULT`.
 
 ```php
 $hasConfig = $encryptionManager->hasConfig($key);
@@ -87,7 +87,7 @@ $hasConfig = $encryptionManager->hasConfig($key);
 
 Check if an [*Encrypter*](#encrypters) instance is loaded.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `Encryption::DEFAULT`.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `EncryptionManager::DEFAULT`.
 
 ```php
 $isLoaded = $encryptionManager->isLoaded($key);
@@ -108,7 +108,7 @@ $encryptionManager->setConfig($key, $options);
 
 Unload an [*Encrypter*](#encrypters).
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `Encryption::DEFAULT`.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `EncryptionManager::DEFAULT`.
 
 ```php
 $encryptionManager->unload($key);
@@ -118,7 +118,7 @@ $encryptionManager->unload($key);
 
 Load a shared [*Encrypter*](#encrypters) instance.
 
-- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `Encryption::DEFAULT`.
+- `$key` is a string representing the [*Encrypter*](#encrypters) key, and will default to `EncryptionManager::DEFAULT`.
 
 ```php
 $encrypter = $encryptionManager->use($key);
