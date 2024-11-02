@@ -30,11 +30,13 @@ use Fyre\Encryption\EncryptionManager;
 
 ## Basic Usage
 
-- `$config` is an array containing key/value of configuration options.
+- `$container` is a [*Container*](https://github.com/elusivecodes/FyreContainer).
 
 ```php
-$encryptionManager = new EncryptionManager($config);
+$encryptionManager = new EncryptionManager($container);
 ```
+
+Default configuration options will be resolved from the "*Encryption*" key in the [*Config*](https://github.com/elusivecodes/FyreConfig) using the [*Container*](https://github.com/elusivecodes/FyreContainer).
 
 
 ## Methods
@@ -48,6 +50,8 @@ Build an [*Encrypter*](#encrypters).
 ```php
 $encrypter = $encryptionManager->build($options);
 ```
+
+[*Encrypter*](#encrypters) dependencies will be resolved automatically from the [*Container*](https://github.com/elusivecodes/FyreContainer).
 
 **Clear**
 
@@ -123,6 +127,8 @@ Load a shared [*Encrypter*](#encrypters) instance.
 ```php
 $encrypter = $encryptionManager->use($key);
 ```
+
+[*Encrypter*](#encrypters) dependencies will be resolved automatically from the [*Container*](https://github.com/elusivecodes/FyreContainer).
 
 
 ## Encrypters

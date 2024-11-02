@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Fyre\Config\Config;
+use Fyre\Container\Container;
 use Fyre\Encryption\EncryptionManager;
 use Fyre\Encryption\Exceptions\EncryptionException;
 use Fyre\Encryption\Handlers\OpenSSLEncrypter;
@@ -146,6 +148,16 @@ final class EncryptionManagerTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->encryption = new EncryptionManager();
+        $container = new Container();
+        $container->singleton(Config::class);
+        $container->use(Config::class)->set('Encryption', [
+            'default' => [
+                'className' => SodiumEncrypter::class,
+            ],
+            'openssl' => [
+                'className' => OpenSSLEncrypter::class,
+            ],
+        ]);
+        $this->encryption = $container->use(EncryptionManager::class);
     }
 }

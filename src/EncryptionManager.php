@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Fyre\Encryption;
 
+use Fyre\Config\Config;
+use Fyre\Container\Container;
 use Fyre\Encryption\Exceptions\EncryptionException;
 use Fyre\Encryption\Handlers\OpenSSLEncrypter;
 use Fyre\Encryption\Handlers\SodiumEncrypter;
@@ -30,18 +32,22 @@ class EncryptionManager
 
     protected array $config = [];
 
+    protected Container $container;
+
     protected array $instances = [];
 
     /**
      * New EncryptionManager constructor.
      *
-     * @param array $config The EncryptionManager config.
+     * @param Container $container The Container.
      */
-    public function __construct(array $config = [])
+    public function __construct(Container $container, Config $config)
     {
-        $config = array_replace(static::$defaults, $config);
+        $this->container = $container;
 
-        foreach ($config as $key => $options) {
+        $handlers = array_replace(static::$defaults, $config->get('Encryption', []));
+
+        foreach ($handlers as $key => $options) {
             $this->setConfig($key, $options);
         }
     }
@@ -64,7 +70,7 @@ class EncryptionManager
             throw EncryptionException::forInvalidClass($options['className']);
         }
 
-        return new $options['className']($options);
+        return $this->container->build($options['className'], ['options' => $options]);
     }
 
     /**

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use Fyre\Container\Container;
 use Fyre\Encryption\EncryptionManager;
 use Fyre\Encryption\Handlers\SodiumEncrypter;
 use PHPUnit\Framework\TestCase;
@@ -27,8 +28,10 @@ final class SodiumTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->encrypter = (new EncryptionManager())->build([
-            'className' => SodiumEncrypter::class,
-        ]);
+        $this->encrypter = Container::getInstance()
+            ->use(EncryptionManager::class)
+            ->build([
+                'className' => SodiumEncrypter::class,
+            ]);
     }
 }
