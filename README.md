@@ -31,12 +31,27 @@ use Fyre\Encryption\EncryptionManager;
 ## Basic Usage
 
 - `$container` is a [*Container*](https://github.com/elusivecodes/FyreContainer).
+- `$config` is a  [*Config*](https://github.com/elusivecodes/FyreConfig).
 
 ```php
-$encryptionManager = new EncryptionManager($container);
+$encryptionManager = new EncryptionManager($container, $config);
 ```
 
 Default configuration options will be resolved from the "*Encryption*" key in the [*Config*](https://github.com/elusivecodes/FyreConfig) using the [*Container*](https://github.com/elusivecodes/FyreContainer).
+
+**Autoloading**
+
+It is recommended to bind the *EncryptionManager* to the [*Container*](https://github.com/elusivecodes/FyreContainer) as a singleton.
+
+```php
+$container->singleton(EncryptionManager::class);
+```
+
+Any dependencies will then be injected automatically when loading.
+
+```php
+$encryptionManager = $container->use(EncryptionManager::class);
+```
 
 
 ## Methods
