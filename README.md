@@ -37,7 +37,7 @@ use Fyre\Encryption\EncryptionManager;
 $encryptionManager = new EncryptionManager($container, $config);
 ```
 
-Default configuration options will be resolved from the "*Encryption*" key in the [*Config*](https://github.com/elusivecodes/FyreConfig) using the [*Container*](https://github.com/elusivecodes/FyreContainer).
+Default configuration options will be resolved from the "*Encryption*" key in the [*Config*](https://github.com/elusivecodes/FyreConfig).
 
 **Autoloading**
 
