@@ -47,7 +47,7 @@ It is recommended to bind the *EncryptionManager* to the [*Container*](https://g
 $container->singleton(EncryptionManager::class);
 ```
 
-Any dependencies will then be injected automatically when loading.
+Any dependencies will be injected automatically when loading from the [*Container*](https://github.com/elusivecodes/FyreContainer).
 
 ```php
 $encryptionManager = $container->use(EncryptionManager::class);
