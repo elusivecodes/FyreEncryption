@@ -199,7 +199,7 @@ You can also load the OpenSSL encrypter using custom configuration.
     - `digest` is a string representing the digest, and will default to "*SHA512*".
 
 ```php
-$encrypter = $encryptionManager->build($options);
+$container->use(Config::class)->set('Encryption.openssl', $options);
 ```
 
 
@@ -219,5 +219,5 @@ You can also load the Sodium encrypter using custom configuration.
     - `digest` is a string representing the digest, and will default to "*SHA512*".
 
 ```php
-$encrypter = $encryptionManager->build($options);
+$container->use(Config::class)->set('Encryption.default', $options);
 ```
