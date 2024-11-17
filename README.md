@@ -31,7 +31,7 @@ use Fyre\Encryption\EncryptionManager;
 ## Basic Usage
 
 - `$container` is a [*Container*](https://github.com/elusivecodes/FyreContainer).
-- `$config` is a  [*Config*](https://github.com/elusivecodes/FyreConfig).
+- `$config` is a [*Config*](https://github.com/elusivecodes/FyreConfig).
 
 ```php
 $encryptionManager = new EncryptionManager($container, $config);
