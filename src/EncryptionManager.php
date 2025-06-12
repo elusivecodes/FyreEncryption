@@ -32,8 +32,6 @@ class EncryptionManager
 
     protected array $config = [];
 
-    protected Container $container;
-
     protected array $instances = [];
 
     /**
@@ -41,10 +39,10 @@ class EncryptionManager
      *
      * @param Container $container The Container.
      */
-    public function __construct(Container $container, Config $config)
-    {
-        $this->container = $container;
-
+    public function __construct(
+        protected Container $container,
+        Config $config
+    ) {
         $handlers = array_replace(static::$defaults, $config->get('Encryption', []));
 
         foreach ($handlers as $key => $options) {
