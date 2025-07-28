@@ -5,11 +5,15 @@ namespace Tests;
 
 use Fyre\Config\Config;
 use Fyre\Container\Container;
+use Fyre\Encryption\Encrypter;
 use Fyre\Encryption\EncryptionManager;
 use Fyre\Encryption\Exceptions\EncryptionException;
 use Fyre\Encryption\Handlers\OpenSSLEncrypter;
 use Fyre\Encryption\Handlers\SodiumEncrypter;
+use Fyre\Utility\Traits\MacroTrait;
 use PHPUnit\Framework\TestCase;
+
+use function class_uses;
 
 final class EncryptionManagerTest extends TestCase
 {
@@ -62,6 +66,14 @@ final class EncryptionManagerTest extends TestCase
 
         $this->assertTrue(
             $this->encryption->isLoaded('openssl')
+        );
+    }
+
+    public function testMacroable(): void
+    {
+        $this->assertContains(
+            MacroTrait::class,
+            class_uses(Encrypter::class)
         );
     }
 

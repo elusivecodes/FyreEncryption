@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Fyre\Encryption;
 
+use Fyre\Utility\Traits\MacroTrait;
+
 use function array_replace;
 use function hash_hkdf;
 use function hash_hmac;
@@ -13,6 +15,8 @@ use function mb_substr;
  */
 abstract class Encrypter
 {
+    use MacroTrait;
+
     protected static array $defaults = [
         'digest' => 'SHA512',
     ];
