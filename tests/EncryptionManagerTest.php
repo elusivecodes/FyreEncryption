@@ -73,6 +73,11 @@ final class EncryptionManagerTest extends TestCase
     {
         $this->assertContains(
             MacroTrait::class,
+            class_uses(EncryptionManager::class)
+        );
+
+        $this->assertContains(
+            MacroTrait::class,
             class_uses(Encrypter::class)
         );
     }

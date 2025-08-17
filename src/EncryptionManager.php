@@ -8,6 +8,7 @@ use Fyre\Container\Container;
 use Fyre\Encryption\Exceptions\EncryptionException;
 use Fyre\Encryption\Handlers\OpenSSLEncrypter;
 use Fyre\Encryption\Handlers\SodiumEncrypter;
+use Fyre\Utility\Traits\MacroTrait;
 
 use function array_key_exists;
 use function array_replace;
@@ -19,6 +20,8 @@ use function is_subclass_of;
  */
 class EncryptionManager
 {
+    use MacroTrait;
+
     public const DEFAULT = 'default';
 
     protected static array $defaults = [
