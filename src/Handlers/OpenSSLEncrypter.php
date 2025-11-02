@@ -5,6 +5,7 @@ namespace Fyre\Encryption\Handlers;
 
 use Fyre\Encryption\Encrypter;
 use Fyre\Encryption\Exceptions\EncryptionException;
+use Override;
 
 use function hash_equals;
 use function openssl_cipher_iv_length;
@@ -34,6 +35,7 @@ class OpenSSLEncrypter extends Encrypter
      *
      * @throws EncryptionException if decryption fails.
      */
+    #[Override]
     public function decrypt(string $data, string $key): mixed
     {
         $secret = $this->generateSecret($key);
@@ -66,6 +68,7 @@ class OpenSSLEncrypter extends Encrypter
      *
      * @throws EncryptionException if encryption fails.
      */
+    #[Override]
     public function encrypt(mixed $data, string $key): string
     {
         $secret = $this->generateSecret($key);
@@ -93,6 +96,7 @@ class OpenSSLEncrypter extends Encrypter
      * @param int|null $length The key length.
      * @return string The encryption key.
      */
+    #[Override]
     public function generateKey(int|null $length = null): string
     {
         $key = openssl_random_pseudo_bytes($length ?? 24, $secure);

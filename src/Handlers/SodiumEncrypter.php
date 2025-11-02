@@ -5,6 +5,7 @@ namespace Fyre\Encryption\Handlers;
 
 use Fyre\Encryption\Encrypter;
 use Fyre\Encryption\Exceptions\EncryptionException;
+use Override;
 
 use function hash_equals;
 use function mb_strlen;
@@ -39,6 +40,7 @@ class SodiumEncrypter extends Encrypter
      *
      * @throws EncryptionException if decryption fails.
      */
+    #[Override]
     public function decrypt(string $data, string $key): mixed
     {
         if (mb_strlen($data, '8bit') < SODIUM_CRYPTO_SECRETBOX_NONCEBYTES + SODIUM_CRYPTO_SECRETBOX_MACBYTES) {
@@ -81,6 +83,7 @@ class SodiumEncrypter extends Encrypter
      * @param string $key The encryption key.
      * @return string The encrypted data.
      */
+    #[Override]
     public function encrypt(mixed $data, string $key): string
     {
         $secret = $this->generateSecret($key, SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
@@ -108,6 +111,7 @@ class SodiumEncrypter extends Encrypter
      * @param int|null $length The key length.
      * @return string The encryption key.
      */
+    #[Override]
     public function generateKey(int|null $length = null): string
     {
         return random_bytes($length ?? SODIUM_CRYPTO_SECRETBOX_KEYBYTES);
